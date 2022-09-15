@@ -1,6 +1,6 @@
 import './pre-start';
-import app from 'server';
-import logger from 'shared/Logger';
+import app from './server';
+import logger from './shared/Logger';
 
 // Start the server
 const port = Number(process.env.PORT || 8080);

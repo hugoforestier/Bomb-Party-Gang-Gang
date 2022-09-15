@@ -5,8 +5,8 @@ import 'express-async-errors';
 import helmet from 'helmet';
 import StatusCodes from 'http-status-codes';
 import morgan from 'morgan';
-import BaseRouter from 'routes/index';
-import logger from 'shared/Logger';
+import BaseRouter from './routes/index';
+import logger from './shared/Logger';
 
 const app = express();
 const { BAD_REQUEST } = StatusCodes;

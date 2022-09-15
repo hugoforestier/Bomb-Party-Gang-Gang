@@ -6,7 +6,7 @@
         "build": "./node_modules/.bin/ts-node build.ts",
         "lint": "eslint . --ext .ts",
         "start": "node -r module-alias/register ./dist --env=production",
-        "start:dev": "nodemon"
+        "start:dev": "ts-node-dev src/index.ts"
     },
     "nodemonConfig": {
         "watch": [
@@ -47,6 +47,7 @@
         "passport": "^0.4.1",
         "passport-jwt": "^4.0.0",
         "passport-local": "^1.0.0",
+        "ts-node-dev": "^2.0.0",
         "uuid": "^8.3.2"
     },
     "devDependencies": {
