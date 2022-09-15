@@ -7,8 +7,11 @@ import StatusCodes from 'http-status-codes';
 import morgan from 'morgan';
 import BaseRouter from './routes/index';
 import logger from './shared/Logger';
+//import passport from './pre-start/passport/passport.init'
 
 const app = express();
+
+//passport(app);
 const { BAD_REQUEST } = StatusCodes;
 
 /** **********************************************************************************

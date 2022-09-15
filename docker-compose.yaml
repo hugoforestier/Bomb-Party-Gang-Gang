@@ -1,0 +1,70 @@
+version: "3.0"
+services:
+  gang-api-dev:
+    profiles: ["dev"]
+    build:
+      context: .
+      dockerfile: .docker/dev.Dockerfile
+    ports:
+      - "127.0.0.1:8080:8080"
+    container_name: gang-api-dev
+    networks:
+      - back-network
+    volumes:
+      - ./:/gang-api
+    depends_on:
+      - "gang-db"
+    restart: "on-failure"
+
+  gang-api:
+    profiles: ["prod"]
+    build:
+      context: .
+      dockerfile: .docker/prod.Dockerfile
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      - "gang-db"
+    container_name: gang-api
+    networks:
+      - back-network
+    restart: "always"
+
+  gang-db:
+    container_name: gang-db
+    image: postgres
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - back-network
+    environment:
+      POSTGRES_PASSWORD: gang
+      POSTGRES_USER: gang
+      POSTGRES_DB: gang
+    restart: "always"
+
+  gang-pgadmin:
+    profiles: ["pgadmin"]
+    image: dpage/pgadmin4:latest
+    container_name: gang-pgadmin
+    hostname: gang-pgadmin
+    restart: on-failure
+    logging:
+      driver: none
+    environment:
+      PGADMIN_DEFAULT_EMAIL: gang@gang.eu
+      PGADMIN_DEFAULT_PASSWORD: gang
+    ports:
+      - "8989:80"
+    links:
+      - gang-db
+    networks:
+      - back-network
+networks:
+  back-network:
+
+volumes:
+  db-data:
+  postgresql_data:
