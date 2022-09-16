@@ -8,9 +8,12 @@
     color: black;
     width: 500px;
     height: 50px;
-    border-radius: 12px;
+    border: solid black 5px;
     box-sizing: border-box;
     margin: 8px 0 0 0;
     padding: 0 0 0 10px;
+  }
+  .text-input:focus {
+    outline: none;
   }
 }

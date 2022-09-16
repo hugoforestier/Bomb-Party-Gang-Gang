@@ -2,8 +2,8 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
-import Login from './pages/Login/Login';
-import Register from './pages/Register';
+import SignIn from './pages/SignIn/SignIn';
+import SignUp from './pages/SignUp/SignUp';
 import PageNotFound from './pages/PageNotFound';
 import Lobby from './pages/Lobby';
 
@@ -15,8 +15,8 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route element={<Lobby />} path="/" />
           </Route>
-          <Route element={<Login />} path="/login" />
-          <Route element={<Register />} path="/register" />
+          <Route element={<SignIn />} path="/signin" />
+          <Route element={<SignUp />} path="/signup" />
           <Route element={<PageNotFound />} path="*" />
         </Routes>
       </BrowserRouter>
