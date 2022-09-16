@@ -1,6 +1,5 @@
-import { warn } from 'console';
 import cookieParser from 'cookie-parser';
-import { User } from 'models/user.model';
+import { User } from '../../models/user.model';
 import passport from 'passport';
 import passportJWT from 'passport-jwt';
 import LocalStrategy from 'passport-local';
@@ -25,7 +24,8 @@ export default function passportInit(app: any): void {
         session: false,
       },
       (username, password, done) => {
-        UserService.findUserByUsername(username).then((user: User) => {
+        UserService.findUserByUsername(username).then((user) => {
+
           if (!user) {
             return done(null, false);
           }
@@ -36,9 +36,8 @@ export default function passportInit(app: any): void {
 
           const isValid = UserService.validatePassword(
             user.password,
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            user.salt!,
             password,
-            user.salt,
           );
 
           if (isValid) {
@@ -59,7 +58,7 @@ export default function passportInit(app: any): void {
         ]),
         secretOrKey: KEYS.JWT_TOKEN_SECRET,
       },
-      function (jwtPayload, cb) {
+      async function (jwtPayload, cb) {
         return UserService.findUserByUuid(jwtPayload.uuid)
           .then((user: User | null) => {
             return cb(null, user);

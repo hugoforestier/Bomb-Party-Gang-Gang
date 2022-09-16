@@ -9,7 +9,6 @@ datasource db {
 
 model user {
   u_id       BigInt  @id @default(autoincrement())
-  u_email    String  @unique @db.VarChar
   u_password String? @db.VarChar
   u_username String  @unique @db.VarChar(30)
   u_salt     String? @db.VarChar

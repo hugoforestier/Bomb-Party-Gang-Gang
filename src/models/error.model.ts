@@ -1,4 +1,6 @@
-export class RequestError {
+export default class RequestError implements Error {
+
+  name =  'error';
 
   status: number;
 
