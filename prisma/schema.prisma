@@ -14,3 +14,13 @@ model user {
   u_salt     String? @db.VarChar
   u_uuid     String  @unique @db.Uuid
 }
+
+
+model score {
+  s_id           BigInt  @id @default(autoincrement())
+  s_highestScore Int     @default(0)
+  s_lowestScore  Int     @default(0)
+  s_lastScore    Int     @default(0)
+  s_nbGames      Int     @default(0)
+  u_uuid         String  @unique @db.Uuid
+}

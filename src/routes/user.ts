@@ -5,7 +5,6 @@ import { body, validationResult } from 'express-validator';
 import { StatusCodes } from 'http-status-codes';
 import passport from 'passport';
 import { User } from 'models/user.model';
-//import { on } from 'events';
 
 const router = Router();
 

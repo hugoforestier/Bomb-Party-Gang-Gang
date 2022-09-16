@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "score" ALTER COLUMN "s_highestScore" SET DEFAULT 0,
+ALTER COLUMN "s_lowestScore" SET DEFAULT 0,
+ALTER COLUMN "s_lastScore" SET DEFAULT 0,
+ALTER COLUMN "s_nbGames" SET DEFAULT 0;
