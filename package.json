@@ -6,7 +6,7 @@
         "build": "./node_modules/.bin/ts-node build.ts",
         "lint": "eslint . --ext .ts",
         "start": "node -r module-alias/register ./dist --env=production",
-        "start:dev": "ts-node-dev src/index.ts"
+        "start:dev": "./node_modules/.bin/nodemon"
     },
     "nodemonConfig": {
         "watch": [
@@ -16,7 +16,7 @@
         "ignore": [
             "src/public"
         ],
-        "exec": "./node_modules/.bin/ts-node -r tsconfig-paths/register ./src"
+        "exec": "./node_modules/.bin/ts-node-dev ./src/index.ts"
     },
     "_moduleAliases": {
         "@daos": "dist/daos",
