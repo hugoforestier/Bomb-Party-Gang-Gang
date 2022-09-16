@@ -41,7 +41,7 @@ export default function passportInit(app: any): void {
           );
 
           if (isValid) {
-            return done(null, User);
+            return done(null, user);
           }
           return done(null, false);
         });

@@ -28,7 +28,6 @@ router.post(
         return res.sendStatus(StatusCodes.OK);
       })
       .catch((error: RequestError) => {
-        console.log('error', error);
         return next(error);
       });
   },
@@ -56,18 +55,14 @@ router.post(
       if (!user) {
         return res.status(401).json({ error: 'Unauthorized.' });
       }
-      console.log('hugo');
       req.logIn(user, function (error) {
-        console.log('hugo');
         if (error) {
           return next(error);
         }
         if (!req.user) {
           return res.status(404).json({ error: 'User not found.' });
         }
-        console.log('d');
         const token = UserService.createAuthToken(req.user as User);
-
         return res.status(200).json({ jwt: token });
       });
     })(req, res, next);
@@ -75,6 +70,3 @@ router.post(
 );
 
 export default router;
-
-
-
