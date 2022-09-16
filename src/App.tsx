@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
-import Login from './pages/Login';
+import Login from './pages/Login/Login';
 import Register from './pages/Register';
 import PageNotFound from './pages/PageNotFound';
 import Lobby from './pages/Lobby';

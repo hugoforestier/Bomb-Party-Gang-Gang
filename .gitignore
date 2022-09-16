@@ -26,3 +26,4 @@ yarn-error.log*
 
 .dir-locals.el
 .env
+.vscode
