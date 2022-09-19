@@ -8,9 +8,10 @@ const override: CSSProperties = {
   borderColor: 'red',
 };
 
-interface TextButtonProps {
+export interface TextButtonProps {
   label: string;
   color?: string;
+  filled?: boolean;
   loading?: boolean;
   onClick?: () => any;
 }
@@ -18,6 +19,7 @@ interface TextButtonProps {
 function TextButton({
   label,
   color,
+  filled,
   loading,
   onClick,
 }: TextButtonProps) {
@@ -25,8 +27,7 @@ function TextButton({
     <button
       onClick={onClick}
       type="submit"
-      className="text-button"
-      style={{ background: color }}
+      className={`text-button ${filled ? 'filled-button' : 'empty-button'}`}
     >
       <ClipLoader color={color} loading={loading} cssOverride={override} size={150} />
       {label}
@@ -36,6 +37,7 @@ function TextButton({
 
 TextButton.defaultProps = {
   color: getComputedStyle(document.body).getPropertyValue('--primary'),
+  filled: true,
   loading: false,
   onClick: undefined,
 };

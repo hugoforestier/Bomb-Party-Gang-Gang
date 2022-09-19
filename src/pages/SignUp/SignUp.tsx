@@ -1,17 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SignUpForm from '../../modules/SignUpForm/SignUpForm';
+import AuthForm from '../../modules/AuthForm/AuthForm';
 import TextButton from '../../components/TextButton/TextButton';
 import './SignUp.scss';
 
 export default function SignUp() {
   const navigate = useNavigate();
+  const [login, setLogin] = useState<string>('');
+  const [loginError, setLoginError] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [passwordError, setPasswordError] = useState<string>('');
+
+  const signUpInputs = [
+    {
+      id: 'sign-up-form-login',
+      label: 'Login',
+      value: login,
+      error: loginError,
+      onChange: setLogin,
+    },
+    {
+      id: 'sign-up-form-password',
+      label: 'Password',
+      value: password,
+      type: 'password',
+      error: passwordError,
+      onChange: setPassword,
+    },
+  ];
+
+  const signUpButton = { label: 'Sign up' };
+
+  const handleSignUp = () => {
+    if (login.length === 0) {
+      setLoginError('Enter your login to sign in to your account.');
+    } else {
+      setLoginError('');
+    }
+    if (password.length === 0) {
+      setPasswordError('Enter your login to sign in to your account.');
+    } else {
+      setPasswordError('');
+    }
+  };
 
   return (
     <div id="sign-up">
-      <h1>Create a new account</h1>
-      <SignUpForm />
-      <TextButton label="Sign in" onClick={() => navigate('/signin', { replace: true })} />
+      <AuthForm
+        title="Create a new account"
+        inputs={signUpInputs}
+        submitButton={signUpButton}
+        onSubmit={handleSignUp}
+      />
+      <TextButton filled={false} label="Sign in" onClick={() => navigate('/signin', { replace: true })} />
     </div>
   );
 }

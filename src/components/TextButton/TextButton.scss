@@ -5,6 +5,25 @@
   align-items: center;
   justify-content: center;
   margin: 50px 0 0 0;
-  color: white;
   border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.filled-button {
+  color: white;
+  background: black;
+  border: none;
+}
+
+.empty-button {
+  color: black;
+  background: transparent;
+  border: solid black 5px;
+}
+
+.empty-button:hover {
+  color: white;
+  background: black;
+  transition: ease 0.2s;
 }
