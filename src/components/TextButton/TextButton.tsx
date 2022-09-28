@@ -1,12 +1,6 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import SquareLoader from 'react-spinners/SquareLoader';
 import styles from './TextButton.module.scss';
-
-const override: CSSProperties = {
-  display: 'block',
-  margin: '0 auto',
-  borderColor: 'red',
-};
 
 export interface TextButtonProps {
   label: string;
@@ -28,7 +22,7 @@ function TextButton({
       type="submit"
       className={buttonClass}
     >
-      <SquareLoader className={styles.loader} loading={loading} cssOverride={override} />
+      <SquareLoader className={styles.loader} loading={loading} />
       {!loading ? label : undefined}
     </button>
   );

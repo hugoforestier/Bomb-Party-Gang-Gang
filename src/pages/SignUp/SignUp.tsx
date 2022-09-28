@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AuthForm from '../../modules/AuthForm/AuthForm';
+import SimpleForm from '../../components/Form/SimpleForm/SimpleForm';
 import TextButton from '../../components/TextButton/TextButton';
 import styles from './SignUp.module.scss';
 
@@ -29,7 +29,7 @@ export default function SignUp() {
     },
   ];
 
-  const signUpButton = { label: 'Sign up' };
+  const signUpButton = { label: 'Register' };
 
   const handleSignUp = () => {
     if (login.length === 0) {
@@ -46,13 +46,13 @@ export default function SignUp() {
 
   return (
     <div className={styles.signUp}>
-      <AuthForm
+      <SimpleForm
         title="SIGN UP"
         inputs={signUpInputs}
         submitButton={signUpButton}
         onSubmit={handleSignUp}
       />
-      <TextButton filled={false} label="Sign in" onClick={() => navigate('/signin', { replace: true })} />
+      <TextButton filled={false} label="Login" onClick={() => navigate('/signin', { replace: true })} />
     </div>
   );
 }

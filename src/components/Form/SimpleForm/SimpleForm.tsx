@@ -1,8 +1,8 @@
 import React from 'react';
-import Form from '../../components/Form/Form';
-import TextInput, { TextInputProps } from '../../components/TextInput/TextInput';
-import TextButton, { TextButtonProps } from '../../components/TextButton/TextButton';
-import './AuthForm.scss';
+import TextButton, { TextButtonProps } from '../../TextButton/TextButton';
+import TextInput, { TextInputProps } from '../../TextInput/TextInput';
+import Form from '../Form';
+import styles from './SimpleForm.module.scss';
 
 interface AuthFormProps {
   title: string;
@@ -11,11 +11,11 @@ interface AuthFormProps {
   onSubmit: () => any;
 }
 
-export default function AuthForm({
+export default function SimpleForm({
   title, inputs, submitButton, onSubmit,
 }: AuthFormProps) {
   return (
-    <div className="auth-form">
+    <div className={styles.authForm}>
       <h1>{title}</h1>
       <Form onSubmit={onSubmit}>
         {(() => {

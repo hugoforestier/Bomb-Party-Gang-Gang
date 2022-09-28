@@ -1,20 +1,32 @@
 @import 'base';
 
 .textButton {
-    width: 500px;
+    width: 175px;
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 50px 0 0 0;
     border: none;
-    font-size: 1.2em;
+    font-size: 1.5em;
     cursor: pointer;
+    transition: 150ms ease-in;
+    position: relative;
+
+    .loader {
+        position: absolute;
+        height: 30px !important;
+        width: 50% !important;
+    }
 }
 
 .filled {
     color: $primary;
     background: $secondary;
+
+    .loader {
+        backdrop-filter: none;
+        background-color: $primary !important;
+    }
 
     &:hover {
         background: $secondaryLight;
@@ -26,13 +38,12 @@
     background: transparent;
     border: solid $secondary 5px;
 
-    &:hover {
-        color: $primary;
-        background: $secondary;
+    .loader {
+        backdrop-filter: none;
+        background-color: $secondary !important;
+    }
 
-        .loader {
-            height: 80%;
-            background-color: $primary !important;
-        }
+    &:hover {
+        background: $primaryLight;
     }
 }

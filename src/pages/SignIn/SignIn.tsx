@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AuthForm from '../../modules/AuthForm/AuthForm';
+import SimpleForm from '../../components/Form/SimpleForm/SimpleForm';
 import TextButton from '../../components/TextButton/TextButton';
 import styles from './SignIn.module.scss';
 
@@ -46,7 +46,7 @@ export default function SignIn() {
 
   return (
     <div className={styles.signIn}>
-      <AuthForm
+      <SimpleForm
         title="SIGN IN"
         inputs={signInInputs}
         submitButton={signInButton}
