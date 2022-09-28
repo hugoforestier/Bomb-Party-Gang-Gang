@@ -12,7 +12,6 @@
         "@types/react": "^18.0.20",
         "@types/react-dom": "^18.0.6",
         "axios": "^0.27.2",
-        "node-sass": "^7.0.3",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-redux": "^8.0.2",
@@ -20,12 +19,13 @@
         "react-scripts": "5.0.1",
         "react-spinners": "^0.13.4",
         "redux-thunk": "^2.4.1",
+        "sass": "^1.55.0",
         "typescript": "^4.8.3",
         "web-vitals": "^2.1.4"
     },
     "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
+        "start": "SASS_PATH=$PWD/src/styles/ react-scripts start",
+        "build": "SASS_PATH=$PWD/scr/tyles react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "lint": "./node_modules/.bin/eslint --ext .ts --ext .tsx ."

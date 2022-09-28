@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthForm from '../../modules/AuthForm/AuthForm';
 import TextButton from '../../components/TextButton/TextButton';
-import './SignIn.scss';
+import styles from './SignIn.module.scss';
 
 export default function SignIn() {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ export default function SignIn() {
     },
   ];
 
-  const signInButton = { label: 'Sign in' };
+  const signInButton = { label: 'Login' };
 
   const handleSignIn = () => {
     if (login.length === 0) {
@@ -45,14 +45,14 @@ export default function SignIn() {
   };
 
   return (
-    <div id="sign-in">
+    <div className={styles.signIn}>
       <AuthForm
-        title="Log in to your account"
+        title="SIGN IN"
         inputs={signInInputs}
         submitButton={signInButton}
         onSubmit={handleSignIn}
       />
-      <TextButton filled={false} label="Sign up" onClick={() => navigate('/signup', { replace: true })} />
+      <TextButton filled={false} label="Register" onClick={() => navigate('/signup', { replace: true })} />
     </div>
   );
 }

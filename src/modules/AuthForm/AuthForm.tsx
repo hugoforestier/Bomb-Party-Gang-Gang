@@ -22,13 +22,12 @@ export default function AuthForm({
           const textInputs: React.ReactElement[] = [];
 
           inputs.forEach(({
-            id, label, value, type, error, onChange,
+            id, value, type, error, onChange,
           }: TextInputProps) => {
             textInputs.push(
               <TextInput
                 key={id}
                 id={id}
-                label={label}
                 value={value}
                 type={type}
                 error={error}

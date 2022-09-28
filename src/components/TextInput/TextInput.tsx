@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import './TextInput.scss';
+import styles from './TextInput.module.scss';
 
 export interface TextInputProps {
   id: string;
-  label: string;
+  label?: string;
   value: string;
   type?: string;
   error?: string;
@@ -26,33 +26,29 @@ function TextInput({
     }
   };
 
+  const onChangeFct = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (onChange) onChange(e.target.value);
+  };
+
+  let classInputField = styles.input;
+  if (type === 'password') {
+    classInputField += ` ${styles.inputPassword}`;
+  }
+
   return (
-    <div className="text-input">
-      <label htmlFor={id} className="input-label">
-        <div className="input-field-infos">
-          {label}
-          <div className="error-message">
-            {error}
-          </div>
-        </div>
-        <div className="input-field">
-          <input
-            id={id}
-            name={id}
-            value={value}
-            type={inputType}
-            onChange={(e) => {
-              if (onChange) {
-                onChange(e.target.value);
-              }
-            }}
-            maxLength={15}
-          />
-          {type === 'password'
-            ? <button type="button" onClick={togglePasswordVisibility}>{pwdVisibilityToggler}</button>
-            : null}
-        </div>
+    <div className={styles.textInput}>
+      <label htmlFor={id} className={styles.label}>
+        {label}
       </label>
+      <div className={classInputField}>
+        <input id={id} name={id} value={value} type={inputType} onChange={onChangeFct} />
+        {type === 'password' ? (
+          <button tabIndex={-1} type="button" onClick={togglePasswordVisibility}>
+            {pwdVisibilityToggler}
+          </button>
+        ) : null}
+      </div>
+      <div className={styles.errorMessage}>{error}</div>
     </div>
   );
 }
@@ -61,6 +57,7 @@ TextInput.defaultProps = {
   type: 'text',
   error: '',
   onChange: undefined,
+  label: undefined,
 };
 
 export default TextInput;

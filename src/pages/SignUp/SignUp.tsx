@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthForm from '../../modules/AuthForm/AuthForm';
 import TextButton from '../../components/TextButton/TextButton';
-import './SignUp.scss';
+import styles from './SignUp.module.scss';
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -45,9 +45,9 @@ export default function SignUp() {
   };
 
   return (
-    <div id="sign-up">
+    <div className={styles.signUp}>
       <AuthForm
-        title="Create a new account"
+        title="SIGN UP"
         inputs={signUpInputs}
         submitButton={signUpButton}
         onSubmit={handleSignUp}

@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
-import ClipLoader from 'react-spinners/ClipLoader';
-import './TextButton.scss';
+import SquareLoader from 'react-spinners/SquareLoader';
+import styles from './TextButton.module.scss';
 
 const override: CSSProperties = {
   display: 'block',
@@ -10,33 +10,32 @@ const override: CSSProperties = {
 
 export interface TextButtonProps {
   label: string;
-  color?: string;
+  className?: string;
   filled?: boolean;
   loading?: boolean;
   onClick?: () => any;
 }
 
 function TextButton({
-  label,
-  color,
-  filled,
-  loading,
-  onClick,
+  label, className, filled, loading, onClick,
 }: TextButtonProps) {
+  let buttonClass = `${className} ${styles.textButton}`;
+  buttonClass += filled ? ` ${styles.filled}` : ` ${styles.empty}`;
+
   return (
     <button
       onClick={onClick}
       type="submit"
-      className={`text-button ${filled ? 'filled-button' : 'empty-button'}`}
+      className={buttonClass}
     >
-      <ClipLoader color={color} loading={loading} cssOverride={override} size={150} />
-      {label}
+      <SquareLoader className={styles.loader} loading={loading} cssOverride={override} />
+      {!loading ? label : undefined}
     </button>
   );
 }
 
 TextButton.defaultProps = {
-  color: getComputedStyle(document.body).getPropertyValue('--primary'),
+  className: '',
   filled: true,
   loading: false,
   onClick: undefined,

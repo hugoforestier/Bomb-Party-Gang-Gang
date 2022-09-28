@@ -1,0 +1,49 @@
+@import 'base';
+
+.textInput {
+    margin: 22px 0 0 0;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    .infos {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .input {
+        position: relative;
+        input {
+            font-size: 1.5em;
+            background: white;
+            height: 50px;
+            width: 500px;
+            border: solid $secondary 5px;
+            padding: 0 5px;
+        }
+        button {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 50px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            margin: 0 5px 0 0;
+            font-weight: 700;
+            text-align: center;
+        }
+
+    }
+
+
+    .inputPassword {
+        input {
+            padding-right: 50px;
+        }
+    }
+
+}

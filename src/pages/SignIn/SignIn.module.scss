@@ -1,10 +1,11 @@
-#sign-in {
+@import 'base';
+
+.signIn {
   height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: var(--secondary);
-  padding: 50px 0 0 0;
+  background: $primary;
 }
