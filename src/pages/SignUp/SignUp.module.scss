@@ -1,11 +1,16 @@
 @import 'base';
 
 .signUp {
-  height: 100vh;
-  width: 100%;
-  background: $primary;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+    height: 100vh;
+    width: 100%;
+    background: $primary;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 200px;
+
+    .separator {
+        width: 500px;
+        margin: 16px 0;
+    }
 }

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SimpleForm from '../../components/Form/SimpleForm/SimpleForm';
-import TextButton from '../../components/TextButton/TextButton';
+import SimpleForm from '../../components/forms/SimpleForm/SimpleForm';
+import TextButton from '../../components/buttons/TextButton/TextButton';
 import styles from './SignUp.module.scss';
+import Separator from '../../components/separators/Separator/Separator';
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -52,6 +53,7 @@ export default function SignUp() {
         submitButton={signUpButton}
         onSubmit={handleSignUp}
       />
+      <Separator className={styles.separator} />
       <TextButton filled={false} label="Login" onClick={() => navigate('/signin', { replace: true })} />
     </div>
   );

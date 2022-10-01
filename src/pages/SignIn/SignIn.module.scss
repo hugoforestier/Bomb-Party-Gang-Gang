@@ -1,11 +1,16 @@
 @import 'base';
 
 .signIn {
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: $primary;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: $primary;
+    padding-top: 200px;
+
+    .separator {
+        width: 500px;
+        margin: 16px 0;
+    }
 }

@@ -1,10 +1,11 @@
 @import 'base';
 
 .textInput {
-    margin: 22px 0 0 0;
+    margin: 0 0 2em 0;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    position: relative;
 
     .infos {
         width: 100%;
@@ -36,7 +37,14 @@
             font-weight: 700;
             text-align: center;
         }
+    }
 
+    .errorMessage {
+        color: $red;
+        font-weight: 600;
+        position: absolute;
+        bottom: 0;
+        transform: translateY(100%);
     }
 
 
