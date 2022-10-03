@@ -1,0 +1,33 @@
+@import 'base';
+
+.wrapper {
+    position: relative;
+    height: 100vh;
+
+    .leftBar {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        background: $secondary;
+        width: 160px;
+
+        .title, .titleShadow {
+            position: absolute;
+            width: 800px;
+            font-size: 56px;
+        }
+
+        .title {
+            text-shadow: $secondary 2px 0px 0px, $secondary 1.75517px 0.958851px 0px, $secondary 1.0806px 1.68294px 0px, $secondary 0.141474px 1.99499px 0px, $secondary -0.832294px 1.81859px 0px, $secondary -1.60229px 1.19694px 0px, $secondary -1.97998px 0.28224px 0px, $secondary -1.87291px -0.701566px 0px, $secondary -1.30729px -1.5136px 0px, $secondary -0.421592px -1.95506px 0px, $secondary 0.567324px -1.91785px 0px, $secondary 1.41734px -1.41108px 0px, $secondary 1.92034px -0.558831px 0px;            
+            color: $primary;
+            transform: rotate(90deg) translate(50%, 330px);
+        }
+
+        .titleShadow {
+            color: $secondary;
+            text-shadow: $textBg 2px 0px 0px, $textBg 1.75517px 0.958851px 0px, $textBg 1.0806px 1.68294px 0px, $textBg 0.141474px 1.99499px 0px, $textBg -0.832294px 1.81859px 0px, $textBg -1.60229px 1.19694px 0px, $textBg -1.97998px 0.28224px 0px, $textBg -1.87291px -0.701566px 0px, $textBg -1.30729px -1.5136px 0px, $textBg -0.421592px -1.95506px 0px, $textBg 0.567324px -1.91785px 0px, $textBg 1.41734px -1.41108px 0px, $textBg 1.92034px -0.558831px 0px;
+            transform: rotate(90deg) translate(calc(50% + 5px), 335px);
+        }
+    }
+}

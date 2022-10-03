@@ -4,6 +4,7 @@ import SimpleForm from '../../components/forms/SimpleForm/SimpleForm';
 import TextButton from '../../components/buttons/TextButton/TextButton';
 import styles from './SignIn.module.scss';
 import Separator from '../../components/separators/Separator/Separator';
+import AuthDecoration from '../../modules/AuthDecoration/AuthDecoration';
 
 export default function SignIn() {
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ export default function SignIn() {
   };
 
   return (
-    <div className={styles.signIn}>
+    <AuthDecoration className={styles.signIn}>
       <SimpleForm
         title="SIGN IN"
         inputs={signInInputs}
@@ -55,6 +56,6 @@ export default function SignIn() {
       />
       <Separator className={styles.separator} />
       <TextButton filled={false} label="Register" onClick={() => navigate('/signup', { replace: true })} />
-    </div>
+    </AuthDecoration>
   );
 }
