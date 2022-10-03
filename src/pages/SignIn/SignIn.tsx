@@ -1,20 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SimpleForm from '../../components/forms/SimpleForm/SimpleForm';
 import TextButton from '../../components/buttons/TextButton/TextButton';
 import styles from './SignIn.module.scss';
 import Separator from '../../components/separators/Separator/Separator';
 import AuthDecoration from '../../modules/AuthDecoration/AuthDecoration';
-import { useAppDispatch } from '../../redux/types';
+import { useAppDispatch, useAppSelector } from '../../redux/types';
 import { login } from '../../redux/reducers/login/loginReducer';
+import { getLoginStatus } from '../../redux/reducers/login/loginUtils';
 
 export default function SignIn() {
   const dispatch = useAppDispatch();
+  const loginStatus = useAppSelector(getLoginStatus);
   const navigate = useNavigate();
-  const [username, setUsername] = useState<string>('');
-  const [loginError, setLoginError] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [passwordError, setPasswordError] = useState<string>('');
+  const [username, setUsername] = useState('');
+  const [loginError, setLoginError] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   const signInInputs = [
     {
@@ -44,13 +46,13 @@ export default function SignIn() {
     } else {
       setLoginError('');
     }
-    if (password.length === 0) {
-      setPasswordError('Password is empty.');
+    if (password.length < 5) {
+      setPasswordError('Password should be at least 5 characters long.');
       errors += 1;
     } else {
       setPasswordError('');
     }
-    return errors >= 0;
+    return errors > 0;
   };
 
   const handleSignIn = () => {
@@ -63,6 +65,16 @@ export default function SignIn() {
     }));
   };
 
+  useEffect(() => {
+    if (loginStatus.status === 'success') {
+      navigate('/');
+    } else if (loginStatus.status === 'error') {
+      if (loginStatus.error! === 401) {
+        setPasswordError('User or password may be incorrect.');
+      }
+    }
+  }, [loginStatus, dispatch, navigate]);
+
   return (
     <AuthDecoration className={styles.signIn}>
       <SimpleForm
@@ -70,6 +82,7 @@ export default function SignIn() {
         inputs={signInInputs}
         submitButton={signInButton}
         onSubmit={handleSignIn}
+        loading={loginStatus.status === 'loading'}
       />
       <Separator className={styles.separator} />
       <TextButton filled={false} label="Register" onClick={() => navigate('/signup', { replace: true })} />

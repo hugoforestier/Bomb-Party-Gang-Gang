@@ -6,11 +6,13 @@ import { Status } from '../utils';
 const name = 'login';
 
 interface InitialState {
-  user: {
+  login: {
     status: Status;
     error?: number;
-    username?: string;
-    token?: string;
+    user?: {
+      username: string;
+      token: string;
+    };
   };
   register: {
     status: Status;
@@ -19,7 +21,7 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
-  user: {
+  login: {
     status: 'none',
   },
   register: {
@@ -75,9 +77,9 @@ const slice = createSlice({
   initialState,
   name,
   reducers: {
-    reset: () => initialState,
+    resetLoginReducer: () => initialState,
     resetLogin: (state) => {
-      state.user = initialState.user;
+      state.login = initialState.login;
     },
     resetRegister: (state) => {
       state.register = initialState.register;
@@ -96,19 +98,21 @@ const slice = createSlice({
         state.register.status = 'success';
       })
       .addCase(login.pending, (state) => {
-        state.user.status = 'loading';
+        state.login.status = 'loading';
       })
       .addCase(login.rejected, (state, action) => {
-        state.user.error = action.payload;
-        state.user.status = 'error';
+        state.login.error = action.payload;
+        state.login.status = 'error';
       })
       .addCase(login.fulfilled, (state, action) => {
-        state.user!.token = action.payload.token;
-        state.user!.username = action.payload.username;
-        state.user!.status = 'success';
+        state.login.user = {
+          username: action.payload.username,
+          token: action.payload.token,
+        };
+        state.login.status = 'success';
       });
   },
 });
 
-export const { reset } = slice.actions;
+export const { resetLoginReducer, resetLogin, resetRegister } = slice.actions;
 export default slice.reducer;

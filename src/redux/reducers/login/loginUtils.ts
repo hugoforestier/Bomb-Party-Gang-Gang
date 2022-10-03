@@ -1,4 +1,4 @@
 import { RootState } from '../../types';
 
-export const getUser = (state: RootState) => state.login.user;
-export const getUser2 = (state: RootState) => state.login.user;
+export const getLoginStatus = (state: RootState) => state.login.login;
+export const getRegisterStatus = (state: RootState) => state.login.register;

@@ -11,12 +11,14 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route element={<ProtectedRoute />}>
+          <Route element={<ProtectedRoute loggedIn redirectTo="/signin" />}>
             <Route element={<Lobby />} path="/" />
           </Route>
-          <Route element={<SignIn />} path="/signin" />
-          <Route element={<SignUp />} path="/signup" />
-          <Route element={<PageNotFound />} path="*" />
+          <Route element={<ProtectedRoute loggedIn={false} redirectTo="/" />}>
+            <Route element={<SignIn />} path="/signin" />
+            <Route element={<SignUp />} path="/signup" />
+            <Route element={<PageNotFound />} path="*" />
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>

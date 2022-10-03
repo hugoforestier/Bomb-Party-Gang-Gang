@@ -35,12 +35,12 @@ export default function SignUp() {
 
   const handleSignUp = () => {
     if (login.length === 0) {
-      setLoginError('Enter your login to sign in to your account.');
+      setLoginError('Username is empty.');
     } else {
       setLoginError('');
     }
-    if (password.length === 0) {
-      setPasswordError('Enter your login to sign in to your account.');
+    if (password.length < 5) {
+      setPasswordError('Password should be at least 5 characters long.');
     } else {
       setPasswordError('');
     }

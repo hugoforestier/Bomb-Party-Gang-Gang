@@ -9,10 +9,11 @@ interface AuthFormProps {
   inputs: TextInputProps[];
   submitButton: TextButtonProps;
   onSubmit: () => any;
+  loading?: boolean;
 }
 
 export default function SimpleForm({
-  title, inputs, submitButton, onSubmit,
+  title, inputs, submitButton, onSubmit, loading,
 }: AuthFormProps) {
   const textInputs: React.ReactElement[] = [];
 
@@ -36,8 +37,12 @@ export default function SimpleForm({
       <h1>{title}</h1>
       <Form onSubmit={onSubmit}>
         {textInputs}
-        <TextButton className={styles.button} label={submitButton.label} />
+        <TextButton className={styles.button} label={submitButton.label} loading={loading} />
       </Form>
     </div>
   );
 }
+
+SimpleForm.defaultProps = {
+  loading: false,
+};
