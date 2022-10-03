@@ -5,10 +5,13 @@ import TextButton from '../../components/buttons/TextButton/TextButton';
 import styles from './SignIn.module.scss';
 import Separator from '../../components/separators/Separator/Separator';
 import AuthDecoration from '../../modules/AuthDecoration/AuthDecoration';
+import { useAppDispatch } from '../../redux/types';
+import { login } from '../../redux/reducers/login/loginReducer';
 
 export default function SignIn() {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [login, setLogin] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
   const [loginError, setLoginError] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordError, setPasswordError] = useState<string>('');
@@ -17,9 +20,9 @@ export default function SignIn() {
     {
       id: 'sign-in-form-login',
       label: 'Login',
-      value: login,
+      value: username,
       error: loginError,
-      onChange: setLogin,
+      onChange: setUsername,
     },
     {
       id: 'sign-in-form-password',
@@ -33,17 +36,31 @@ export default function SignIn() {
 
   const signInButton = { label: 'Login' };
 
-  const handleSignIn = () => {
-    if (login.length === 0) {
+  const handleErrors = () => {
+    let errors = 0;
+    if (username.length === 0) {
       setLoginError('Username is empty.');
+      errors += 1;
     } else {
       setLoginError('');
     }
     if (password.length === 0) {
       setPasswordError('Password is empty.');
+      errors += 1;
     } else {
       setPasswordError('');
     }
+    return errors >= 0;
+  };
+
+  const handleSignIn = () => {
+    if (handleErrors()) {
+      return;
+    }
+    dispatch(login({
+      username,
+      password,
+    }));
   };
 
   return (
