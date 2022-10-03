@@ -6,7 +6,7 @@ import styles from './SignIn.module.scss';
 import Separator from '../../components/separators/Separator/Separator';
 import AuthDecoration from '../../modules/AuthDecoration/AuthDecoration';
 import { useAppDispatch, useAppSelector } from '../../redux/types';
-import { login } from '../../redux/reducers/login/loginReducer';
+import { login, resetLogin } from '../../redux/reducers/login/loginReducer';
 import { getLoginStatus } from '../../redux/reducers/login/loginUtils';
 
 export default function SignIn() {
@@ -69,6 +69,7 @@ export default function SignIn() {
     if (loginStatus.status === 'success') {
       navigate('/');
     } else if (loginStatus.status === 'error') {
+      dispatch(resetLogin());
       if (loginStatus.error! === 401) {
         setPasswordError('User or password may be incorrect.');
       }

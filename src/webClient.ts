@@ -16,7 +16,6 @@ export function removeAuthTokenFromClient() {
 }
 
 const jwt = localStorage.getItem(JWT_LOCAL_STORAGE);
-console.log(jwt);
 if (jwt !== null) {
   addAuthTokenToClient(jwt);
 }
