@@ -13,8 +13,8 @@ model user {
   u_username String  @unique @db.VarChar(30)
   u_salt     String? @db.VarChar
   u_uuid     String  @unique @db.Uuid
+  score      score[]
 }
-
 
 model score {
   s_id           BigInt  @id @default(autoincrement())
@@ -22,5 +22,6 @@ model score {
   s_lowestScore  Int     @default(0)
   s_lastScore    Int     @default(0)
   s_nbGames      Int     @default(0)
-  u_uuid         String  @unique @db.Uuid
+  u_id           BigInt  @unique
+  user           user?   @relation(fields: [u_id], references: [u_id])
 }

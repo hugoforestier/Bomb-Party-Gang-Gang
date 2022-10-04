@@ -1,21 +1,25 @@
 export class User {
-  uuid: string;
+  id: bigint;
 
   username: string;
+
+  uuid: string;
 
   password?: string | null;
 
   salt?: string | null;
 
   constructor(
-    uuid: string,
+    id: bigint,
     username: string,
+    uuid: string,
     password?: string | null,
     salt?: string | null,
   ) {
-    this.uuid = uuid;
+    this.id = id;
     this.username = username;
     this.password = password;
     this.salt = salt;
+    this.uuid = uuid;
   }
 }

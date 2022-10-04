@@ -1,9 +1,9 @@
 import { Prisma } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
 import jwt from 'jsonwebtoken';
-import { v4 as uuidv4 } from 'uuid';
 import prisma from '..//client';
 import KEYS from '../config/keys';
+import { v4 as uuidv4 } from 'uuid';
 import { User } from '../models/user.model';
 import HashUtils from '../utils/hashutils';
 import RequestError from '../models/error.model';
@@ -20,17 +20,18 @@ export default class UserService {
       hash = HashUtils.hashPassword(password, salt);
     }
     const uuid = uuidv4();
-
+    console.log('test123');
     try {
       const newUser = await prisma.user.create({
         data:{
-          u_uuid: uuid,
           u_password: hash,
           u_username: username,
           u_salt: salt,
+          u_uuid: uuid,
         },
       });
       return new User(
+        newUser.u_id,
         newUser.u_uuid,
         newUser.u_username,
       );
@@ -49,11 +50,11 @@ export default class UserService {
     }
   }
 
-  static async deleteUser(uuid: string): Promise<null> {
+  static async deleteUser(id: bigint): Promise<null> {
     try {
       await prisma.user.delete({
         where: {
-          u_uuid: uuid,
+          u_id: id,
         },
       });
       return null;
@@ -71,8 +72,9 @@ export default class UserService {
       });
       if (!user) return null;
       return new User(
-        user?.u_uuid,
+        user?.u_id,
         user?.u_username,
+        user?.u_uuid,
         user?.u_password,
         user?.u_salt,
       );
@@ -89,7 +91,7 @@ export default class UserService {
         },
       });
       if (!user) return null;
-      return new User(user?.u_uuid, user?.u_username);
+      return new User(user?.u_id, user?.u_uuid, user?.u_username);
     } catch (e: any) {
       throw new Error(e.message);
     }

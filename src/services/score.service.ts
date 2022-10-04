@@ -12,20 +12,20 @@ export default class ScoreService {
     try {
       const score = await prisma.score.findUnique({
         where: {
-          u_uuid: user.uuid,
+          u_id: user.id,
         },
       });
       if (!score) {
         return null;
       }
 
-      console.log(score?.s_highestScore);
+      console.log(score.s_highestScore);
       return new Score(
         score.s_highestScore,
         score.s_lowestScore,
         score.s_lastScore,
         score.s_nbGames,
-        score.u_uuid,
+        score.u_id,
       );
     } catch (e: any) {
       // eslint-disable-next-line @typescript-eslint/no-throw-literal
@@ -38,32 +38,33 @@ export default class ScoreService {
     user: User,
   ): Promise<Score | null> {
     try {
+      console.log('this is my score1', score);
       const prevScore = await ScoreService.getScores(user);
-      if (!prevScore) return null;
-      const newScore = new Score(
-        prevScore.highestScore,
-        prevScore.lowestScore,
-        score,
-        prevScore.nbGame,
-        user.uuid);
       if (!prevScore) {
         await prisma.score.create({
           data:{
-            u_uuid: user.uuid,
+            u_id: user.id,
             s_highestScore: score,
             s_lowestScore: score,
             s_lastScore: score,
             s_nbGames: 1,
           },
         });
+        console.log('this is my score', score);
         return new Score(
           score,
           score,
           score,
           score,
-          user.uuid,
+          user.id,
         );
       }
+      const newScore = new Score(
+        prevScore.highestScore,
+        prevScore.lowestScore,
+        score,
+        prevScore.nbGame,
+        user.id);
       if (prevScore.lowestScore > score) {
         newScore.lowestScore = score;
       }
@@ -73,7 +74,7 @@ export default class ScoreService {
       newScore.nbGame = prevScore.nbGame + 1;
       await prisma.score.update({
         where: {
-          u_uuid: user.uuid,
+          u_id: user.id,
         },
         data: {
           s_highestScore: newScore.highestScore,
@@ -82,6 +83,7 @@ export default class ScoreService {
           s_nbGames: newScore.nbGame,
         },
       });
+      console.log('this is my score', score);
       return newScore;
     } catch (e: any) {
       // eslint-disable-next-line @typescript-eslint/no-throw-literal
