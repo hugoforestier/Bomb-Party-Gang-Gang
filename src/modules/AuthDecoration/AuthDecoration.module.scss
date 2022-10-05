@@ -12,6 +12,10 @@
         background: $secondary;
         width: 160px;
 
+        @media all and (max-width: 1024px) {
+            display: none;
+        }
+
         .title, .titleShadow {
             position: absolute;
             width: 800px;
@@ -42,6 +46,10 @@
     border-radius: 100%;
     transform: rotate(-45deg);
 
+    @media all and (max-width: 1200px) {
+        display: none;
+    }
+
     &:after {
         content: '';
         position: absolute;
@@ -61,14 +69,24 @@
     height: 230px;
     width: 900px;
     overflow: hidden;
+
+    @media all and (max-width: 1200px) {
+        display: none;
+    }
+
     div {
         position: absolute;
-        transform: rotate(15deg);
-        top: -150px;
-        right: 10px;
+        transform: rotate(15deg) translate(-5%,-60%);
+        top: 0;
+        right: 0;
         width: 1000px;
         height: 250px;
         background: $secondary;
+        
+        @media all and (max-width: 1500px) {
+            height: 200px;
+            width: 800px;
+        }
     }
 }
 
@@ -80,6 +98,10 @@
     width: 700px;
     overflow: hidden;
 
+    @media all and (max-width: 1200px) {
+        display: none;
+    }
+
     .barWrapper {
         position: absolute;
         bottom: 0;
@@ -89,6 +111,10 @@
         display: flex;
         justify-content: space-between;
         transform: translate(-25%,25%) rotate(45deg);
+
+        @media all and (max-width: 1500px) {
+            height: 400px;
+        }
 
         div {
             height: 100%;
@@ -104,20 +130,39 @@
     right: 10px;
     height: 200px;
     width: 900px;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column-reverse;
+    overflow: hidden;
 
-    .line {
+    @media all and (max-width: 1580px) {
+        height: 165px;
+    }
+
+    @media all and (max-width: 1320px) {
+        height: 130px;
+    }
+
+    @media all and (max-width: 1200px) {
+        display: none;
+    }
+
+    .lines {
+        height: 200px;
+        width: 900px;
         display: flex;
-        flex-direction: row-reverse;
+        justify-content: space-between;
+        flex-direction: column-reverse;
 
-        div {
-            margin-left: 10px;
-            width: 25px;
-            height: 25px;
-            background: $secondary;
-            border-radius: 100%;
+        .line {
+            display: flex;
+            flex-direction: row-reverse;
+
+            div {
+                margin-left: 10px;
+                width: 25px;
+                height: 25px;
+                background: $secondary;
+                border-radius: 100%;
+            }
         }
+        
     }
 }

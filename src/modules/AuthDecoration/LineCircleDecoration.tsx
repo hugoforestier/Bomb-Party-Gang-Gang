@@ -20,7 +20,9 @@ export default function LineCircleDecoration() {
 
   return (
     <div className={styles.lineCircleDecoration}>
-      {lineContent}
+      <div className={styles.lines}>
+        {lineContent}
+      </div>
     </div>
   );
 }
