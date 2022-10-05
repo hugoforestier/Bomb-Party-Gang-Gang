@@ -71,7 +71,7 @@ export default function SignIn() {
     } else if (loginStatus.status === 'error') {
       dispatch(resetLogin());
       if (loginStatus.error! === 401) {
-        setPasswordError('User or password may be incorrect.');
+        setPasswordError('Username or password is incorrect.');
       }
     }
   }, [loginStatus, dispatch, navigate]);
