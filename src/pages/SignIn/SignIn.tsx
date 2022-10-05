@@ -78,15 +78,17 @@ export default function SignIn() {
 
   return (
     <AuthDecoration className={styles.signIn}>
-      <SimpleForm
-        title="SIGN IN"
-        inputs={signInInputs}
-        submitButton={signInButton}
-        onSubmit={handleSignIn}
-        loading={loginStatus.status === 'loading'}
-      />
-      <Separator className={styles.separator} />
-      <TextButton filled={false} label="Register" onClick={() => navigate('/signup', { replace: true })} />
+      <div className={styles.form}>
+        <SimpleForm
+          title="SIGN IN"
+          inputs={signInInputs}
+          submitButton={signInButton}
+          onSubmit={handleSignIn}
+          loading={loginStatus.status === 'loading'}
+        />
+        <Separator className={styles.separator} />
+        <TextButton filled={false} label="Register" onClick={() => navigate('/signup', { replace: true })} />
+      </div>
     </AuthDecoration>
   );
 }

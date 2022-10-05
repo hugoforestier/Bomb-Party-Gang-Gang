@@ -82,14 +82,16 @@ export default function SignUp() {
 
   return (
     <AuthDecoration className={styles.signUp}>
-      <SimpleForm
-        title="SIGN UP"
-        inputs={signUpInputs}
-        submitButton={signUpButton}
-        onSubmit={handleSignUp}
-      />
-      <Separator className={styles.separator} />
-      <TextButton filled={false} label="Login" onClick={() => navigate(SIGN_IN_URL, { replace: true })} />
+      <div className={styles.form}>
+        <SimpleForm
+          title="SIGN UP"
+          inputs={signUpInputs}
+          submitButton={signUpButton}
+          onSubmit={handleSignUp}
+        />
+        <Separator className={styles.separator} />
+        <TextButton filled={false} label="Login" onClick={() => navigate(SIGN_IN_URL, { replace: true })} />
+      </div>
     </AuthDecoration>
   );
 }

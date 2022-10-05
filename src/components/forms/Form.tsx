@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './Form.module.scss';
 
 interface FormProps {
   onSubmit: () => any;
@@ -8,6 +9,7 @@ interface FormProps {
 export default function Form({ onSubmit, children }: FormProps) {
   return (
     <form
+      className={styles.form}
       onSubmit={(event) => {
         event.preventDefault();
         if (onSubmit) {
