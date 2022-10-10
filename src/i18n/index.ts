@@ -16,7 +16,7 @@ i18next
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'fr',
+    lng: 'en',
   });
 
 export default i18next;
