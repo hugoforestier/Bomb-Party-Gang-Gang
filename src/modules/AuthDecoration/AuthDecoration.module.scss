@@ -114,8 +114,8 @@
         justify-content: space-between;
         transform: translate(-25%,25%) rotate(45deg);
 
-        @media all and (max-width: 1500px) {
-            height: 400px;
+        @media (max-width: 1500px) or (max-height: 820px) {
+            height: 380px;
         }
 
         div {
