@@ -1,11 +1,17 @@
 @import 'base';
 
 .textInput {
-    margin: 0 0 2em 0;
+    margin: 0 0 1.75em 0;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
     position: relative;
+
+    .label {
+        font-size: 16pt;
+        font-weight: 700;
+        color: $secondary;
+    }        
 
     .infos {
         width: 100%;
@@ -16,12 +22,14 @@
     .input {
         position: relative;
         input {
+            color: $secondary;
             font-size: 1.5em;
             background: $textBg;
             height: 50px;
             width: 100%;
             border: solid $secondary 5px;
             padding: 0 5px;
+            margin-top: 5px;
         }
         button {
             position: absolute;

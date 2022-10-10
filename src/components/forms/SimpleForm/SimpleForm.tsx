@@ -18,7 +18,7 @@ export default function SimpleForm({
   const textInputs: React.ReactElement[] = [];
 
   inputs.forEach(({
-    id, value, type, error, onChange,
+    id, value, type, error, onChange, label,
   }: TextInputProps) => {
     textInputs.push(
       <TextInput
@@ -28,6 +28,7 @@ export default function SimpleForm({
         type={type}
         error={error}
         onChange={onChange}
+        label={label}
       />,
     );
   });
