@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from './TextInput.module.scss';
 
 export interface TextInputProps {
@@ -13,16 +14,17 @@ export interface TextInputProps {
 function TextInput({
   id, label, value, type, error, onChange,
 }: TextInputProps) {
+  const { t } = useTranslation();
   const [inputType, setInputType] = useState(type);
-  const [pwdVisibilityToggler, setPwdVisibilityToggler] = useState('SHOW');
+  const [pwdVisibilityToggler, setPwdVisibilityToggler] = useState(t('showPassword') as string);
 
   const togglePasswordVisibility = () => {
     if (inputType === 'password') {
       setInputType('text');
-      setPwdVisibilityToggler('HIDE');
+      setPwdVisibilityToggler(t('hidePassword'));
     } else {
       setInputType('password');
-      setPwdVisibilityToggler('SHOW');
+      setPwdVisibilityToggler(t('showPassword'));
     }
   };
 

@@ -21,22 +21,22 @@
 
     .input {
         position: relative;
+        margin-top: 5px;
         input {
             color: $secondary;
-            font-size: 1.5em;
+            font-size: 1.5rem;
             background: $textBg;
             height: 50px;
             width: 100%;
             border: solid $secondary 5px;
             padding: 0 5px;
-            margin-top: 5px;
         }
         button {
             position: absolute;
             right: 0;
             top: 0;
             height: 100%;
-            width: 50px;
+            width: 60px;
             background: none;
             border: none;
             cursor: pointer;

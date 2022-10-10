@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import SimpleForm from '../../components/forms/SimpleForm/SimpleForm';
 import TextButton from '../../components/buttons/TextButton/TextButton';
 import styles from './SignIn.module.scss';
@@ -17,18 +18,19 @@ export default function SignIn() {
   const [loginError, setLoginError] = useState('');
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const { t } = useTranslation();
 
   const signInInputs = [
     {
       id: 'sign-in-form-login',
-      label: 'Login',
+      label: t('username'),
       value: username,
       error: loginError,
       onChange: setUsername,
     },
     {
       id: 'sign-in-form-password',
-      label: 'Password',
+      label: t('password'),
       value: password,
       error: passwordError,
       onChange: setPassword,
@@ -36,18 +38,18 @@ export default function SignIn() {
     },
   ];
 
-  const signInButton = { label: 'Login' };
+  const signInButton = { label: t('login') };
 
   const handleErrors = () => {
     let errors = 0;
     if (username.length === 0) {
-      setLoginError('Username is empty.');
+      setLoginError(t('usernameEmpty'));
       errors += 1;
     } else {
       setLoginError('');
     }
     if (password.length < 5) {
-      setPasswordError('Password should be at least 5 characters long.');
+      setPasswordError(t('shortPassword'));
       errors += 1;
     } else {
       setPasswordError('');
@@ -71,23 +73,23 @@ export default function SignIn() {
     } else if (loginStatus.status === 'error') {
       dispatch(resetLogin());
       if (loginStatus.error! === 401) {
-        setPasswordError('Username or password is incorrect.');
+        setPasswordError(t('incorrectPassword'));
       }
     }
-  }, [loginStatus, dispatch, navigate]);
+  }, [loginStatus, dispatch, navigate, t]);
 
   return (
-    <AuthDecoration className={styles.signIn}>
+    <AuthDecoration className={styles.signIn} title={t('title')}>
       <div className={styles.form}>
         <SimpleForm
-          title="SIGN IN"
+          title={t('signin').toUpperCase()}
           inputs={signInInputs}
           submitButton={signInButton}
           onSubmit={handleSignIn}
           loading={loginStatus.status === 'loading'}
         />
-        <Separator className={styles.separator} />
-        <TextButton filled={false} label="Register" onClick={() => navigate('/signup', { replace: true })} />
+        <Separator className={styles.separator} text={t('or')} />
+        <TextButton filled={false} label={t('register')} onClick={() => navigate('/signup', { replace: true })} />
       </div>
     </AuthDecoration>
   );

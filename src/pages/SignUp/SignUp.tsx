@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import SimpleForm from '../../components/forms/SimpleForm/SimpleForm';
 import TextButton from '../../components/buttons/TextButton/TextButton';
 import styles from './SignUp.module.scss';
@@ -11,6 +12,7 @@ import { getRegisterStatus } from '../../redux/reducers/login/loginUtils';
 import { SIGN_IN_URL } from '../../keys';
 
 export default function SignUp() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const registerStatus = useAppSelector(getRegisterStatus);
@@ -22,14 +24,14 @@ export default function SignUp() {
   const signUpInputs = [
     {
       id: 'sign-up-form-login',
-      label: 'Login',
+      label: t('username'),
       value: username,
       error: loginError,
       onChange: setUsername,
     },
     {
       id: 'sign-up-form-password',
-      label: 'Password',
+      label: t('password'),
       value: password,
       type: 'password',
       error: passwordError,
@@ -37,19 +39,19 @@ export default function SignUp() {
     },
   ];
 
-  const signUpButton = { label: 'Register' };
+  const signUpButton = { label: t('register') };
 
   const handleErrors = () => {
     let errors = 0;
 
     if (username.length === 0) {
-      setLoginError('Username is empty.');
+      setLoginError(t('usernameEmpty'));
       errors += 1;
     } else {
       setLoginError('');
     }
     if (password.length < 5) {
-      setPasswordError('Password should be at least 5 characters long.');
+      setPasswordError(t('shortPassword'));
       errors += 1;
     } else {
       setPasswordError('');
@@ -72,25 +74,25 @@ export default function SignUp() {
       navigate(SIGN_IN_URL);
     } else if (registerStatus.status === 'error') {
       if (registerStatus.error! === 409) {
-        setLoginError('User already exists');
+        setLoginError(t('userAlreadyExists'));
       } else {
-        setPasswordError('Couldn\'t create user');
+        setPasswordError(t('createUserError'));
       }
     }
     dispatch(resetRegister());
-  }, [navigate, registerStatus, dispatch]);
+  }, [navigate, registerStatus, dispatch, t]);
 
   return (
     <AuthDecoration className={styles.signUp}>
       <div className={styles.form}>
         <SimpleForm
-          title="SIGN UP"
+          title={t('signup').toUpperCase()}
           inputs={signUpInputs}
           submitButton={signUpButton}
           onSubmit={handleSignUp}
         />
-        <Separator className={styles.separator} />
-        <TextButton filled={false} label="Login" onClick={() => navigate(SIGN_IN_URL, { replace: true })} />
+        <Separator className={styles.separator} text={t('or')} />
+        <TextButton filled={false} label={t('login')} onClick={() => navigate(SIGN_IN_URL, { replace: true })} />
       </div>
     </AuthDecoration>
   );
