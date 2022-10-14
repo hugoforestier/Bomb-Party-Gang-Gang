@@ -13,6 +13,7 @@ model user {
   u_username String  @unique @db.VarChar(30)
   u_salt     String? @db.VarChar
   u_uuid     String  @unique @db.Uuid
+  u_status   Boolean
   score      score[]
 }
 

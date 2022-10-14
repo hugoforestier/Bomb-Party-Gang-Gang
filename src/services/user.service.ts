@@ -20,7 +20,6 @@ export default class UserService {
       hash = HashUtils.hashPassword(password, salt);
     }
     const uuid = uuidv4();
-    console.log('test123');
     try {
       const newUser = await prisma.user.create({
         data:{
@@ -28,6 +27,7 @@ export default class UserService {
           u_username: username,
           u_salt: salt,
           u_uuid: uuid,
+          u_status: false,
         },
       });
       return new User(
@@ -116,6 +116,21 @@ export default class UserService {
     return jwt.sign({ uuid: user.uuid }, KEYS.JWT_TOKEN_SECRET!, {
       expiresIn: '3600s',
     });
+  }
+
+  static async setStatuses(connected: number[]): Promise<null> {
+    connected.forEach(function (item) {
+      prisma.user.update({
+        where: {
+          u_id: item,
+        },
+        data: {
+          u_status: true,
+        },
+      });
+      console.log('item');
+    });
+    return null;
   }
 }
 

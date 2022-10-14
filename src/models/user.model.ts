@@ -9,6 +9,8 @@ export class User {
 
   salt?: string | null;
 
+  status?: boolean | null;
+
   constructor(
     id: bigint,
     username: string,
@@ -21,5 +23,6 @@ export class User {
     this.password = password;
     this.salt = salt;
     this.uuid = uuid;
+    this.status = false;
   }
 }

@@ -3,6 +3,7 @@ import app from './server';
 import logger from './shared/Logger';
 import { Server as WsServer } from 'ws';
 import { WebSocketServer } from './websocket/types';
+import { initWebSocket } from './websocket/setupWS';
 
 // Start the server
 const port = Number(process.env.PORT || 8080);
@@ -21,4 +22,4 @@ server.on('upgrade', (request, socket, head) => {
   });
 });
 
-
+initWebSocket();
