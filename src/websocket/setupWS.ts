@@ -5,8 +5,10 @@ import { ClientInfo, WebSocketClientInfo } from './types';
 
 const ping = setInterval(() => {
   wss.clients.forEach(function each(ws) {
+    console.log("alive?", ws.info);
     if (ws.info.alive === false) {
       ws.terminate();
+      console.log("terminating")
       return;
     }
 
@@ -25,18 +27,19 @@ export function initWebSocket(): void {
   wss.on('connection', (ws: WebSocketClientInfo): void => {
     ws.info = new ClientInfo();
 
+    ws.on('message', (msg) => {
+      ws.send(msg);
+    });
+
     ws.on('pong', () => {
       ws.info.alive = true;
     });
 
-    ws.on('message', (msg) => {
-      ws.send(msg);
-    });
   });
 
   wss.on('close', () => {
+    console.log("Closed");
     clearInterval(ping);
     clearInterval(updateDB);
   });
-
 }
