@@ -17,7 +17,7 @@ export const wss: WebSocketServer = new WsServer({
 
 server.on('upgrade', (request, socket, head) => {
   wss.handleUpgrade(request, socket, head, socket2 => {
-    console.log(socket2);
+    socket2;
     wss.emit('connection', socket, request);
   });
 });
