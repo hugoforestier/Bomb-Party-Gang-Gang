@@ -28,6 +28,10 @@ export function initWebSocket(): void {
     ws.on('pong', () => {
       ws.info.alive = true;
     });
+
+    ws.on('message', (msg) => {
+      ws.send(msg);
+    });
   });
 
   wss.on('close', () => {
