@@ -68,3 +68,6 @@ artifacts/o
 .log
 
 .dir-locals.el
+
+.env
+yarn.lock
