@@ -89,7 +89,7 @@ export default function SignIn() {
           loading={loginStatus.status === 'loading'}
         />
         <Separator className={styles.separator} text={t('or')} />
-        <TextButton filled={false} label={t('register')} onClick={() => navigate('/signup', { replace: true })} />
+        <TextButton filled={false} label={t('register')} onClick={() => navigate('/signup')} />
       </div>
     </AuthDecoration>
   );

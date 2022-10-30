@@ -13,6 +13,6 @@ export default function ProtectedRoute({
 }: Props) {
   const hasToken = localStorage.getItem(JWT_LOCAL_STORAGE) !== null;
   return (
-    hasToken === loggedIn ? <Outlet /> : <Navigate to={redirectTo} />
+    hasToken === loggedIn ? <Outlet /> : <Navigate to={redirectTo} replace />
   );
 }

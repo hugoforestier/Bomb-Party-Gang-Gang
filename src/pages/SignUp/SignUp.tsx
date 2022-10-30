@@ -92,7 +92,7 @@ export default function SignUp() {
           onSubmit={handleSignUp}
         />
         <Separator className={styles.separator} text={t('or')} />
-        <TextButton filled={false} label={t('login')} onClick={() => navigate(SIGN_IN_URL, { replace: true })} />
+        <TextButton filled={false} label={t('login')} onClick={() => navigate(SIGN_IN_URL)} />
       </div>
     </AuthDecoration>
   );
