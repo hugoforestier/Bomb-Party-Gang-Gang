@@ -1,13 +1,13 @@
-import { Session } from './session.model';
 import { User } from './user.model';
 
 export class AuthInfo {
   user: User;
 
-  session: Session;
+  roomName?: string;
 
-  constructor(user: User, session: Session) {
-    this.session = session;
+  constructor(user: User) {
     this.user = user;
   }
+
+  
 }

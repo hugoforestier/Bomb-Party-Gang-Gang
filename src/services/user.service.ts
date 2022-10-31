@@ -22,7 +22,7 @@ export default class UserService {
     const uuid = uuidv4();
     try {
       const newUser = await prisma.user.create({
-        data:{
+        data: {
           u_password: hash,
           u_username: username,
           u_salt: salt,
@@ -30,11 +30,11 @@ export default class UserService {
           u_status: false,
         },
       });
-      return new User(
-        newUser.u_id,
-        newUser.u_uuid,
-        newUser.u_username,
-      );
+      return {
+        id: newUser.u_id,
+        uuid: newUser.u_uuid,
+        username: newUser.u_username,
+      };
     } catch (e: any) {
       if (e instanceof Prisma.PrismaClientKnownRequestError) {
         if (e.code === 'P2002') {
@@ -71,13 +71,13 @@ export default class UserService {
         },
       });
       if (!user) return null;
-      return new User(
-        user?.u_id,
-        user?.u_username,
-        user?.u_uuid,
-        user?.u_password,
-        user?.u_salt,
-      );
+      return {
+        id: user?.u_id,
+        username: user?.u_username,
+        uuid: user?.u_uuid,
+        password: user?.u_password ?? undefined,
+        salt: user?.u_salt ?? undefined,
+      };
     } catch (e: any) {
       throw new Error(e.message);
     }
@@ -91,7 +91,11 @@ export default class UserService {
         },
       });
       if (!user) return null;
-      return new User(user?.u_id, user?.u_uuid, user?.u_username);
+      return {
+        id: user?.u_id,
+        uuid: user?.u_uuid,
+        username: user?.u_username,
+      };
     } catch (e: any) {
       throw new Error(e.message);
     }

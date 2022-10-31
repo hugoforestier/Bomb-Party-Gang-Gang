@@ -1,28 +1,13 @@
-export class User {
+export interface User {
   id: bigint;
 
   username: string;
 
   uuid: string;
 
-  password?: string | null;
+  password?: string;
 
-  salt?: string | null;
+  salt?: string;
 
-  status?: boolean | null;
-
-  constructor(
-    id: bigint,
-    username: string,
-    uuid: string,
-    password?: string | null,
-    salt?: string | null,
-  ) {
-    this.id = id;
-    this.username = username;
-    this.password = password;
-    this.salt = salt;
-    this.uuid = uuid;
-    this.status = false;
-  }
+  status?: boolean;
 }
