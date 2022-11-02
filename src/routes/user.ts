@@ -16,7 +16,7 @@ router.post(
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      return res.status(StatusCodes.BAD_REQUEST).json({ errors: errors.array() });
+      return res.sendStatus(StatusCodes.BAD_REQUEST).json({ errors: errors.array() });
     }
 
     UserService.createUser(
@@ -24,7 +24,7 @@ router.post(
       req.body.password,
     )
       .then(() => {
-        return res.sendStatus(StatusCodes.OK);
+        return res.sendStatus(StatusCodes.CREATED);
       })
       .catch((error: RequestError) => {
         return next(error);
@@ -62,7 +62,7 @@ router.post(
           return res.status(404).json({ error: 'User not found.' });
         }
         const token = UserService.createAuthToken(req.user as User);
-        return res.status(200).json({ jwt: token });
+        return res.status(StatusCodes.CREATED).json({ jwt: token });
       });
     })(req, res, next);
   },

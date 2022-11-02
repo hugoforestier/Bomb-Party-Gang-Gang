@@ -25,7 +25,7 @@ router.post(
       req.user as User,
     )
       .then(() => {
-        return res.sendStatus(StatusCodes.OK);
+        return res.sendStatus(StatusCodes.CREATED);
       })
       .catch((error: RequestError) => {
         return next(error);

@@ -44,6 +44,7 @@ app.use('/', BaseRouter);
 app.use('/user', UserRouter);
 app.use('/score', ScoreRouter);
 
+// TODO If bad request server crashes here
 app.use((err: Error, req: Request, res: Response) => {
   console.log(req.resume);
   logger.err(err, true);
