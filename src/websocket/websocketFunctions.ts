@@ -17,17 +17,6 @@ export function broadcastRoomInfo(room: Room) {
   });
 }
 
-export function broadcastPlayersLives(room: Room) {
-  const roomInfo = room.info();
-
-  room.players.forEach(player => {
-    player.send(JSON.stringify({
-      info: 'roomInfo',
-      data: roomInfo,
-    }));
-  });
-}
-
 export function sendRooms(client: WebSocketClientInfo) {
   client.send(JSON.stringify({
     info: 'rooms',
