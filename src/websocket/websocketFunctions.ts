@@ -18,10 +18,10 @@ export function broadcastRoomInfo(room: Room) {
   });
 }
 
-export function roomList(client: WebSocketClientInfo, roomList?: RoomInfoShort[]) {
-  const list: RoomInfoShort[] = roomList ?? [];
+export function roomList(client: WebSocketClientInfo, listToSend?: RoomInfoShort[]) {
+  const list: RoomInfoShort[] = listToSend ?? [];
 
-  if (roomList === undefined) {
+  if (listToSend === undefined) {
     for (const roomName in rooms) {
       list.push(rooms[roomName].infoShort());
     }
