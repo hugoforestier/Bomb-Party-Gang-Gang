@@ -1,161 +1,183 @@
 @import 'base';
 
 #lobby {
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  background: $primary;
-  .body {
+    height: 100vh;
     width: 100%;
     display: flex;
-    flex-flow: column;
-    padding: 20px;
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin: 0 0 12px 0;
-      h1 {
-        font-size: 2em;
-        padding: 0;
-      }
-      button {
-        border-style: none;
-        outline-style: none;
-        height: 50px;
-        width: 50px;
-        border: solid 5px #222;
-        background: transparent;
-        font-size: 1.3em;
-        cursor: pointer;
-      }
-    }
-    .roomSelection {
-      display: flex;
-      flex-direction: column;
-      .addRoomButton {
-        height: 35px;
-        width: 100%;
-        font-size: 1em;
-        border-style: none;
-        outline-style: none;
-        border: solid 5px #222;
-        background: transparent;
-        cursor: pointer;
-        color: #222;
-      }
-      .roomsList {
-        max-height: 243px;
-        flex: 0 1 auto;
-        overflow-y: scroll;
-        padding: 0 10px 0 0;
-        margin: 12px 0 12px 0;
-      }
-      .roomsList::-webkit-scrollbar {
-        width: 5px;
-      }
-      .roomsList::-webkit-scrollbar-track {
-        background: transparent;
-      }
-      .roomsList::-webkit-scrollbar-thumb {
-        background: #222;
-        width: 10px;
-      }
-    }
-    .roomPlayersMobile {
-      display: flex;
-      flex-flow: column;
-      flex: 1 1 auto;
-      overflow-y: auto;
-      background: #222;
-      padding: 21px;
-      margin: 0 0 12px 0;
-      h2 {
-        color: $primary;
-        font-size: 1.2em;
-        margin: 0 0 10px 0;
-      }
-      p {
-        color: $primary;
-        font-size: 1.2em;
-      }
-    }
-    .playButton {
-      width: 100%;
-      margin: auto 0 0 0;
-    }
-  }
-  .roomPlayersDesktop {
-    display: none;
-  }
-}
+    background: $primary;
 
-@media only screen and (min-width: 769px) {
-  #lobby {
     .body {
-      flex: 2;
-      justify-content: space-between;
-      padding: 50px;
-      .header {
-        margin: 0 0 20px 0;
-        h1 {
-          font-size: 5vw;
-          color: #222;
+        width: 100%;
+        display: flex;
+        flex-flow: column;
+        padding: 20px;
+
+        @media only screen and (min-width: 769px) {
+            flex: 2;
+            justify-content: space-between;
+            padding: 50px;
         }
-        button {
-          height: 70px;
-          color: #222;
-          width: 70px;
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 0 12px 0;
+
+            @media only screen and (min-width: 769px) {
+                margin: 0 0 20px 0;
+            }
+
+            h1 {
+                font-size: 2em;
+                padding: 0;
+
+                @media only screen and (min-width: 769px) {
+                    font-size: 5vw;
+                    color: #222;
+                }
+            }
+
+            button {
+                border-style: none;
+                outline-style: none;
+                height: 50px;
+                width: 50px;
+                border: solid 5px #222;
+                background: transparent;
+                font-size: 1.3em;
+                cursor: pointer;
+
+                @media only screen and (min-width: 769px) {
+                    height: 70px;
+                    color: #222;
+                    width: 70px;
+                }
+            }
         }
-      }
-      .roomSelection {
-        flex: 1 1 auto;
-        overflow-y: auto;
-        max-height: 524px;
-        .addRoomButton {
-          width: auto;
-          height: 65px;
-          font-size: 2.5em;
+
+        .roomSelection {
+            display: flex;
+            flex-direction: column;
+
+            @media only screen and (min-width: 769px) {
+                flex: 1 1 auto;
+                overflow-y: auto;
+                max-height: 524px;
+            }
+
+            .addRoomButton {
+                height: 35px;
+                width: 100%;
+                font-size: 1em;
+                border-style: none;
+                outline-style: none;
+                border: solid 5px #222;
+                background: transparent;
+                cursor: pointer;
+                color: #222;
+
+                @media only screen and (min-width: 769px) {
+                    flex: 1 1 auto;
+                    width: auto;
+                    height: 65px;
+                    font-size: 2.5em;
+                }
+
+            }
+
+            .roomsList {
+                max-height: 243px;
+                flex: 0 1 auto;
+                overflow-y: scroll;
+                padding: 0 10px 0 0;
+                margin: 12px 0 12px 0;
+
+                @media only screen and (min-width: 769px) {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    flex-flow: column;
+                    max-height: 100%;
+                }
+            }
+
+            .roomsList::-webkit-scrollbar {
+                width: 5px;
+            }
+
+            .roomsList::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            .roomsList::-webkit-scrollbar-thumb {
+                background: #222;
+                width: 10px;
+            }
         }
-        .roomsList {
-          width: 100%;
-          height: 100%;
-          display: flex;
-          flex-flow: column;
-          max-height: 100%;
+
+        .roomPlayersMobile {
+            display: flex;
+            flex-flow: column;
+            flex: 1 1 auto;
+            overflow-y: auto;
+            background: #222;
+            padding: 21px;
+            margin: 0 0 12px 0;
+
+            @media only screen and (min-width: 769px) {
+                display: none;
+            }
+
+            h2 {
+                color: $primary;
+                font-size: 1.2em;
+                margin: 0 0 10px 0;
+            }
+
+            p {
+                color: $primary;
+                font-size: 1.2em;
+            }
         }
-      }
-      .roomPlayersMobile {
-        display: none;
-      }
-      .playButton {
-        height: 137px;
-        font-size: 4em;
-        font-weight: 900;
-        margin: 20px 0 0 0;
-      }
+
+        .playButton {
+            width: 100%;
+            margin: auto 0 0 0;
+
+            @media only screen and (min-width: 769px) {
+                height: 137px;
+                font-size: 4em;
+                font-weight: 900;
+                margin: 20px 0 0 0;
+            }
+        }
     }
+
     .roomPlayersDesktop {
-      display: flex;
-      align-items: flex-end;
-      flex-flow: column;
-      flex: 1;
-      overflow-y: auto;
-      background: #222;
-      padding: 50px;
-      h2 {
-        color: $primary;
-        font-size: 5vw;
-        margin: 0 0 10px 0;
-      }
-      .roomCapacity {
-        color: grey;
-        margin: 0 0 50px 0;
-      }
-      p {
-        color: $primary;
-        font-size: 1.5em;
-      }
+        display: none;
+
+        @media only screen and (min-width: 769px) {
+            display: flex;
+            align-items: flex-end;
+            flex-flow: column;
+            flex: 1;
+            overflow-y: auto;
+            background: #222;
+            padding: 50px;
+            h2 {
+                color: $primary;
+                font-size: 5vw;
+                margin: 0 0 10px 0;
+            }
+            .roomCapacity {
+                color: grey;
+                margin: 0 0 50px 0;
+            }
+            p {
+                color: $primary;
+                font-size: 1.5em;
+            }
+        }
     }
-  }
 }
