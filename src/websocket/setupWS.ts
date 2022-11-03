@@ -73,7 +73,8 @@ export function initWebSocket(): void {
     });
 
     ws.on('close', () => {
-      websocketFunctions.leaveRoom(ws);
+      if (ws.info.authInfo?.roomName)
+        websocketFunctions.leaveRoom(ws);
     });
 
   });
