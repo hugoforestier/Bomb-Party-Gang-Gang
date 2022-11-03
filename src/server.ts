@@ -7,7 +7,6 @@ import StatusCodes from 'http-status-codes';
 import morgan from 'morgan';
 import BaseRouter from './routes/index';
 import UserRouter from './routes/user';
-import ScoreRouter from './routes/score';
 import logger from './shared/Logger';
 import passport from './pre-start/passport/passport.init';
 
@@ -42,7 +41,6 @@ if (process.env.NODE_ENV === 'production') {
 
 app.use('/', BaseRouter);
 app.use('/user', UserRouter);
-app.use('/score', ScoreRouter);
 
 // TODO If bad request server crashes here
 app.use((err: Error, req: Request, res: Response) => {
