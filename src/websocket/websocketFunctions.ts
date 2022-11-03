@@ -1,4 +1,5 @@
-import Room, { RoomInfo } from './Room';
+import { wss } from '../index';
+import Room, { RoomInfoShort } from './Room';
 import { WebSocketClientInfo } from './types';
 
 export const rooms: {
@@ -17,17 +18,33 @@ export function broadcastRoomInfo(room: Room) {
   });
 }
 
-export function roomList(client: WebSocketClientInfo) {
-  const list: RoomInfo[] = [];
+export function roomList(client: WebSocketClientInfo, roomList?: RoomInfoShort[]) {
+  const list: RoomInfoShort[] = roomList ?? [];
 
-  for (const roomName in rooms) {
-    list.push(rooms[roomName].info());
+  if (roomList === undefined) {
+    for (const roomName in rooms) {
+      list.push(rooms[roomName].infoShort());
+    }
   }
 
   client.send(JSON.stringify({
     info: 'rooms',
     list,
   }));
+}
+
+function broadcastRoomList() {
+  const list: RoomInfoShort[] = [];
+
+  for (const roomName in rooms) {
+    list.push(rooms[roomName].infoShort());
+  }
+
+  wss.clients.forEach((client) => {
+    if (client.info.authInfo === null)
+      return;
+    roomList(client, list);
+  });
 }
 
 function notifyPlayerLeftRoom(client: WebSocketClientInfo) {
@@ -92,6 +109,7 @@ function joinRoom(client: WebSocketClientInfo, command: any): boolean {
   room.users.push(client);
 
   broadcastRoomInfo(room);
+  broadcastRoomList();
   return true;
 }
 
@@ -107,6 +125,7 @@ function createRoom(client: WebSocketClientInfo, command: any): boolean {
 
   rooms[name] = new Room(name, []);
   joinRoom(client, command);
+  broadcastRoomList();
   return true;
 }
 
@@ -130,6 +149,8 @@ function leaveRoom(client: WebSocketClientInfo): boolean {
   } else {
     broadcastRoomInfo(room);
   }
+
+  broadcastRoomList();
 
   return true;
 }

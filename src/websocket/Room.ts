@@ -20,6 +20,11 @@ export type RoomInfo = {
   currentPlayer: number;
 };
 
+export type RoomInfoShort = {
+  name: string;
+  users: UserInfo[];
+};
+
 export default class Room {
   name: string;
 
@@ -103,6 +108,16 @@ export default class Room {
       players: [...this.players],
       started: this.started,
       currentPlayer: this.currentPlayer,
+    };
+  }
+
+  infoShort(): RoomInfoShort {
+    return {
+      name: this.name,
+      users: this.users.map((user) => ({
+        username: user.info.authInfo!.user.username,
+        id: Number(user.info.authInfo!.user.id),
+      })),
     };
   }
 }
