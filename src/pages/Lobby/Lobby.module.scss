@@ -134,7 +134,7 @@
     }
     .roomPlayersDesktop {
       display: flex;
-      align-items: flex-start;
+      align-items: flex-end;
       flex-flow: column;
       flex: 1;
       overflow-y: auto;
@@ -144,6 +144,10 @@
         color: $primary;
         font-size: 5vw;
         margin: 0 0 10px 0;
+      }
+      .roomCapacity {
+        color: grey;
+        margin: 0 0 50px 0;
       }
       p {
         color: $primary;

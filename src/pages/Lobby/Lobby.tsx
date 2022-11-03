@@ -64,6 +64,9 @@ export default function Lobby() {
       </div>
       <div className={styles.roomPlayersDesktop}>
         <h2>PLAYERS</h2>
+        <h2 className={styles.roomCapacity}>
+          {`${rooms[selectedRoom].players.length}/${rooms[selectedRoom].maxCapacity}`}
+        </h2>
         {rooms[selectedRoom].players.map((player) => (
           <p key={player}>{player}</p>
         ))}
