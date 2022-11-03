@@ -1,6 +1,9 @@
 import { wss } from '../index';
 import Room, { RoomInfoShort } from './Room';
 import { WebSocketClientInfo } from './types';
+import { readFileSync } from 'fs';
+
+const dictionary = readFileSync('../utils/fr.txt', 'utf-8');
 
 export const rooms: {
   [key: string]: Room
@@ -99,6 +102,13 @@ function startGame(client: WebSocketClientInfo): boolean {
 }
 
 function checkWord(word: string, statement: string) : boolean {
+  const formatedWord = word.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  if (!formatedWord.includes(statement)) {
+    return false;
+  }
+  if (!dictionary.includes(formatedWord)) {
+    return false;
+  }
   return true;
 }
 
@@ -113,7 +123,6 @@ function submitWord(client: WebSocketClientInfo, command: any): boolean {
     return false;
   }
   if (!checkWord(word, statement)) {
-    room.nextTurn(1);
     return false;
   }
   room.nextTurn(0);
