@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Room } from './types';
+import { Room, RoomList } from './types';
 
 const name = 'websocketHandler';
 
 interface InitialState {
   room?: Room;
-  roomList: Room[];
+  roomList: RoomList;
 }
 
 const initialState: InitialState = {
