@@ -77,7 +77,7 @@ function startClock(room: Room) {
   if (!room.started)
     return;
   room.timeout = setTimeout(function () {
-    room.loseTurn();
+    room.nextTurn(1);
     broadcastRoomInfo(room);
     if (room.started)
       startClock(room);
@@ -95,6 +95,30 @@ function startGame(client: WebSocketClientInfo): boolean {
   room.started = true;
   startClock(room);
   broadcastRoomInfo(room);
+  return true;
+}
+
+function checkWord(word: string, statement: string) : boolean {
+  return true;
+}
+
+function submitWord(client: WebSocketClientInfo, command: any): boolean {
+  const room = getRoom(client.info.authInfo!.roomName);
+  const word = command.word;
+  const statement = command.statement;
+  if (!room || !room.started || typeof word != 'string' || typeof statement != 'string') {
+    return false;
+  }
+  if (room.players[room.currentPlayer].userId != Number(client.info.authInfo!.user.id) || room.timeout === undefined) {
+    return false;
+  }
+  if (!checkWord(word, statement)) {
+    room.nextTurn(1);
+    return false;
+  }
+  room.nextTurn(0);
+  clearTimeout(room.timeout);
+  startClock(room);
   return true;
 }
 
@@ -156,6 +180,7 @@ const websocketFunctions = {
   leaveRoom,
   startGame,
   setReady,
+  submitWord,
 };
 
 export default websocketFunctions;

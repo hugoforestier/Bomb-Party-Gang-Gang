@@ -63,8 +63,8 @@ export default class Room {
     };
   }
 
-  public loseTurn() {
-    this.players[this.currentPlayer].lives -= 1;
+  public nextTurn(nbLifeToRemove: number) {
+    this.players[this.currentPlayer].lives -= nbLifeToRemove;
     if (this.isGameOver()) {
       this.setWinner();
       return;
