@@ -1,10 +1,12 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter, Navigate, Route, Routes,
+} from 'react-router-dom';
 import ProtectedRoute from './components/utils/ProtectedRoute';
 import SignIn from './pages/SignIn/SignIn';
 import SignUp from './pages/SignUp/SignUp';
 import PageNotFound from './pages/PageNotFound';
-import Lobby from './pages/Lobby';
+import Lobby from './pages/Lobby/Lobby';
 
 function App() {
   return (
@@ -12,13 +14,14 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<ProtectedRoute loggedIn redirectTo="/signin" />}>
-            <Route element={<Lobby />} path="/" />
+            <Route element={<Lobby />} path="/lobby" />
           </Route>
-          <Route element={<ProtectedRoute loggedIn={false} redirectTo="/" />}>
+          <Route element={<Navigate to="/lobby" replace />} path="/" />
+          <Route element={<ProtectedRoute loggedIn={false} redirectTo="/lobby" />}>
             <Route element={<SignIn />} path="/signin" />
             <Route element={<SignUp />} path="/signup" />
-            <Route element={<PageNotFound />} path="*" />
           </Route>
+          <Route element={<PageNotFound />} path="*" />
         </Routes>
       </BrowserRouter>
     </div>
