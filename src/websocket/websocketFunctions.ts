@@ -3,7 +3,7 @@ import Room, { RoomInfoShort } from './Room';
 import { WebSocketClientInfo } from './types';
 import { readFileSync } from 'fs';
 
-const dictionary = readFileSync('../utils/fr.txt', 'utf-8');
+const dictionary = readFileSync('./dictionary/fr.txt', 'utf-8');
 
 export const rooms: {
   [key: string]: Room
