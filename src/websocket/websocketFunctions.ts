@@ -61,10 +61,9 @@ function startClock(room: Room) {
     return;
   room.timeout = setTimeout(function () {
     room.loseTurn();
+    broadcastRoomInfo(room);
     if (room.started)
       startClock(room);
-    else
-      broadcastRoomInfo(room);
   }, 15000);
 }
 

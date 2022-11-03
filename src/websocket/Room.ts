@@ -41,7 +41,7 @@ export default class Room {
   }
 
   isGameOver(): boolean {
-    return this.players.filter(player => player.lives > 0).length <= 0;
+    return this.players.filter(player => player.lives > 0).length <= 1;
   }
 
   setWinner() {
@@ -59,11 +59,11 @@ export default class Room {
   }
 
   public loseTurn() {
+    this.players[this.currentPlayer].lives -= 1;
     if (this.isGameOver()) {
       this.setWinner();
       return;
     }
-    this.players[this.currentPlayer].lives -= 1;
     do {
       console.log('oopsie');
       this.currentPlayer = (this.currentPlayer + 1) % this.players.length;
