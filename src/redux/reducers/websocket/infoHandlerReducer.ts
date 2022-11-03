@@ -20,8 +20,7 @@ const slice = createSlice({
   reducers: {
     resetWSInfo: () => initialState,
     rooms: (state, action: PayloadAction<InfoPayload>) => {
-      console.log(action.payload);
-      state.roomList = action.payload.roomList;
+      state.roomList = action.payload.list;
     },
     infoRoom: (state, action: PayloadAction<InfoPayload>) => {
       state.room = action.payload.roomInfo;

@@ -13,8 +13,6 @@ export function useWebSocket(dispatch: AppDispatch): WebSocket | null {
   useEffect(() => {
     if (connectionStatus === 'none') {
       dispatch(connectWS({ dispatch }));
-    } else if (connectionStatus === 'success') {
-      console.log(ws);
     }
   }, [dispatch, connectionStatus, ws]);
 

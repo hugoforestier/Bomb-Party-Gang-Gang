@@ -1,10 +1,18 @@
-export type Player = {
-  username: string;
+export type UserInfo = {
   id: number;
-  lives: number;
+  username: string;
 };
 
-export type Room  = {
+interface Player {
+  userId: number;
+  lives: number;
+  username: string;
+}
+
+export type Room = {
   name: string;
+  started: boolean;
+  lastWinner: UserInfo | null;
+  users: UserInfo[];
   players: Player[];
 };
