@@ -60,7 +60,7 @@ export function initWebSocket(): void {
         }
 
         if (data.command in websocketFunctions) {
-          websocketFunctions[data.command](ws, data);
+          websocketFunctions[data.command as keyof typeof websocketFunctions](ws, data);
         }
 
       } catch (e) {
@@ -70,6 +70,10 @@ export function initWebSocket(): void {
 
     ws.on('pong', () => {
       ws.info.alive = true;
+    });
+
+    ws.on('close', () => {
+      websocketFunctions.leaveRoom(ws);
     });
 
   });

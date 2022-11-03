@@ -108,8 +108,8 @@ function joinRoom(client: WebSocketClientInfo, command: any): boolean {
   client.info.authInfo!.roomName = name;
   room.users.push(client);
 
-  broadcastRoomInfo(room);
   broadcastRoomList();
+  broadcastRoomInfo(room);
   return true;
 }
 
@@ -125,7 +125,6 @@ function createRoom(client: WebSocketClientInfo, command: any): boolean {
 
   rooms[name] = new Room(name, []);
   joinRoom(client, command);
-  broadcastRoomList();
   return true;
 }
 
@@ -136,15 +135,11 @@ function leaveRoom(client: WebSocketClientInfo): boolean {
     return false;
   }
 
-  room.users = room.users.filter(
-    user => {
-      return user.info.authInfo!.user.id !== client.info.authInfo!.user.id;
-    },
-  );
+  room.users = room.users.filter(user => user.info.authInfo!.user.id !== client.info.authInfo!.user.id);
 
   client.info.authInfo!.roomName = undefined;
   notifyPlayerLeftRoom(client);
-  if (room.players.length === 0) {
+  if (room.users.length === 0) {
     delete rooms[name as string];
   } else {
     broadcastRoomInfo(room);
@@ -155,9 +150,7 @@ function leaveRoom(client: WebSocketClientInfo): boolean {
   return true;
 }
 
-const websocketFunctions: {
-  [key: string]: (client: WebSocketClientInfo, command: any) => void,
-} = {
+const websocketFunctions = {
   createRoom,
   joinRoom,
   leaveRoom,
