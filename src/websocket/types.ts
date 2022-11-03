@@ -6,15 +6,9 @@ export class ClientInfo {
 
   authInfo: AuthInfo | null = null;
 
-  ready: boolean;
-
-  lives: number;
-
   constructor() {
     this.alive = true;
     this.authInfo = null;
-    this.ready = false;
-    this.lives = 2;
   }
 }
 

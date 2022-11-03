@@ -3,11 +3,11 @@ import { getConnectedUserIds } from './utilsWS';
 import UserService from '../services/user.service';
 import { ClientInfo, WebSocketClientInfo } from './types';
 import websocketFunctions from './websocketFunctions';
-import { sendRooms } from './websocketFunctions';
+import { roomList } from './websocketFunctions';
 import { verify } from 'jsonwebtoken';
 import KEYS from '../config/keys';
 import { AuthInfo } from '../models/authInfo.model';
-import rooms from './websocketFunctions'
+import rooms from './websocketFunctions';
 
 const ping = setInterval(() => {
   wss.clients.forEach(function each(ws) {
@@ -28,7 +28,7 @@ const updateDB = setInterval(() => {
 
 // TODO document
 async function loginWSClient(client: WebSocketClientInfo, command: any) {
-  console.log("test", rooms);
+  console.log('test', rooms);
   if (typeof command.jwt !== 'string') {
     return;
   }
@@ -39,7 +39,7 @@ async function loginWSClient(client: WebSocketClientInfo, command: any) {
   const user = await UserService.findUserByUuid(data.uuid);
   if (user !== null) {
     client.info.authInfo = new AuthInfo(user);
-    sendRooms(client);
+    roomList(client);
   }
 }
 
