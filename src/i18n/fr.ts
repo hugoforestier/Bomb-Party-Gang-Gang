@@ -16,6 +16,9 @@ const fr: typeof en = {
   or: 'ou',
   createUserError: "Couldn't create user",
   userAlreadyExists: "L'utilisateur existe déjà.",
+  play: 'JOUER',
+  players: 'JOUEURS',
+  noRoom: "Il n'y a pas de rooms, il faudra que tu crées la tienne :/",
 };
 
 export default fr;

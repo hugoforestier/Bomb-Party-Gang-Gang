@@ -48,8 +48,8 @@
                 cursor: pointer;
 
                 @media only screen and (min-width: 769px) {
-                    height: 70px;
                     color: $secondary;
+                    height: 70px;
                     width: 70px;
                 }
             }
@@ -113,6 +113,18 @@
                 background: $secondary;
                 width: 10px;
             }
+
+            .noRoom {
+                white-space: pre-line;
+                text-align: center;
+                font-size: 2em;
+                color: $secondary;
+                font-weight: medium;
+
+                @media only screen and (min-width: 769px) {
+                    font-size: 2.5em;
+                }
+            }
         }
 
         .footer {
@@ -154,28 +166,41 @@
         padding: 32px;
         background: $secondary;
         color: $primary;
+
         .overlayHeader {
             display: flex;
             flex-direction: row;
             align-items: center;
             width: 100%;
             margin: 0 0 32px 0;
+
             .roomTitle {
                 color: $primary;
                 font-size: 2.5em;
                 margin: 0 0 0 50px;
+
                 @media only screen and (min-width: 769px) {
                     font-size: 4em;
                 }
             }
         }
+
         .roomCapacity {
             color: $primary;
             font-size: 1.5em;
             @media only screen and (min-width: 769px) {
-                font-size: 2em;
+                font-size: 2.5em;
             }
         }
+
+        .playerCount {
+            color: $grey;
+            font-size: 1.5em;
+            @media only screen and (min-width: 769px) {
+                font-size: 2.5em;
+            }
+        }
+
         p {
             color: $primary;
             font-size: 1em;

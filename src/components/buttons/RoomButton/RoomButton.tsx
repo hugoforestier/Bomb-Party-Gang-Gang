@@ -1,25 +1,25 @@
 import React from 'react';
+import { ROOM_MAX_CAPACITY } from '../../../keys';
 import styles from './RoomButton.module.scss';
 
 export interface RoomButtonProps {
-  roomId: number;
-  maxCapacity: number;
+  name: string;
   players: Array<string>;
   selected: Boolean;
-  onClick: (roomid: number) => any;
+  onClick: (name: string) => any;
 }
 
 function RoomButton({
-  roomId, maxCapacity, players, selected, onClick,
+  name, players, selected, onClick,
 }: RoomButtonProps) {
   const handleSelection = () => {
     if (onClick) {
-      onClick(roomId);
+      onClick(name);
     }
   };
 
   const getRoomState = () => {
-    if (players.length === maxCapacity) {
+    if (players.length === ROOM_MAX_CAPACITY) {
       return `${styles.roomButton} ${styles.full}`;
     }
     if (selected) {
@@ -34,8 +34,8 @@ function RoomButton({
       type="button"
       className={getRoomState()}
     >
-      <p>{`Room #${roomId}`}</p>
-      <p>{`${players.length}/${maxCapacity}`}</p>
+      <p>{`${name}`}</p>
+      <p>{`${players.length}/${ROOM_MAX_CAPACITY}`}</p>
     </button>
   );
 }

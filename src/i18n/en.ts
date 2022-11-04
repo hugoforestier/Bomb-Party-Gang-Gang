@@ -14,6 +14,9 @@ const en = {
   or: 'or',
   createUserError: "Couldn't create user.",
   userAlreadyExists: 'User already exists.',
+  play: 'PLAY',
+  players: 'PLAYERS',
+  noRoom: "There are no rooms to choose from,\nyou'll have to create your own :/",
 };
 
 export default en;

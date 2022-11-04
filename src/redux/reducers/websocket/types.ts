@@ -17,7 +17,9 @@ export type Room = {
   players: Player[];
 };
 
-export type RoomList = {
+export type RoomDetails = {
   name: string,
   users: UserInfo[]
-}[]
+};
+
+export type RoomList = RoomDetails[];
