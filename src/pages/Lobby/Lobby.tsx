@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { faArrowRightFromBracket, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import styles from './Lobby.module.scss';
 import RoomButton from '../../components/buttons/RoomButton/RoomButton';
@@ -9,11 +9,11 @@ import Separator from '../../components/separators/Separator/Separator';
 import { RoomDetails, RoomList } from '../../redux/reducers/websocket/types';
 import RoomInfoLobby from './RoomInfoLobby';
 import { ROOM_MAX_CAPACITY } from '../../keys';
+import CreateRoomForm from './CreateRoomForm';
 
 export default function Lobby() {
   const [selectedRoom, setSelectedRoom] = useState(undefined as RoomDetails | undefined);
   const [roomCreation, setRoomCreation] = useState(false);
-  const [newRoomName, setNewRoomName] = useState('');
   const { t } = useTranslation();
 
   const rooms: RoomList = [
@@ -38,8 +38,6 @@ export default function Lobby() {
   };
 
   const handleLogout = () => {};
-
-  const createRoom = () => console.log(newRoomName);
 
   let roomButtons = rooms.map((room) => (
     <RoomButton
@@ -76,24 +74,7 @@ export default function Lobby() {
         </div>
       </div>
       <RoomInfoLobby closeMenu={() => setSelectedRoom(undefined)} room={selectedRoom} />
-      {roomCreation
-        ? (
-          <div className={styles.creationRoomOverlay}>
-            <div className={styles.overlayHeader}>
-              <IconButton iconName={faXmark} onClick={() => setRoomCreation(false)} inverted />
-              <h2 className={styles.creationTitle}>CREATE</h2>
-            </div>
-            <div className={styles.instructions}>
-              <input
-                id="roomName"
-                type="text"
-                placeholder={t('TYPE NAME...')}
-                onChange={(e) => setNewRoomName(e.target.value)}
-              />
-            </div>
-            <TextButton className={styles.playButton} label={t('CREATE')} onClick={createRoom} />
-          </div>
-        ) : null}
+      <CreateRoomForm open={roomCreation} closeForm={() => setRoomCreation(false)} />
     </div>
   );
 }
