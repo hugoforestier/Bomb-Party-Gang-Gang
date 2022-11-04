@@ -32,8 +32,8 @@
                 padding: 0;
 
                 @media only screen and (min-width: 769px) {
-                    font-size: 5vw;
-                    color: #222;
+                    font-size: 4em;
+                    color: $secondary;
                 }
             }
 
@@ -42,14 +42,14 @@
                 outline-style: none;
                 height: 50px;
                 width: 50px;
-                border: solid 5px #222;
+                border: solid 5px $secondary;
                 background: transparent;
                 font-size: 1.3em;
                 cursor: pointer;
 
                 @media only screen and (min-width: 769px) {
                     height: 70px;
-                    color: #222;
+                    color: $secondary;
                     width: 70px;
                 }
             }
@@ -76,10 +76,10 @@
                 font-size: 1em;
                 border-style: none;
                 outline-style: none;
-                border: solid 5px #222;
+                border: solid 5px $secondary;
                 background: transparent;
                 cursor: pointer;
-                color: #222;
+                color: $secondary;
 
                 @media only screen and (min-width: 769px) {
                     flex: 1 1 auto;
@@ -110,7 +110,7 @@
                 background: transparent;
             }
             .roomsList::-webkit-scrollbar-thumb {
-                background: #222;
+                background: $secondary;
                 width: 10px;
             }
         }
@@ -121,7 +121,6 @@
             flex-direction: column;
             padding: 20px;
             @media only screen and (min-width: 769px) {
-                margin: 130px 0 0 0;
             }
 
             .separator {
@@ -168,7 +167,7 @@
                 font-size: 2.5em;
                 margin: 0 0 0 50px;
                 @media only screen and (min-width: 769px) {
-                    font-size: 7vw;
+                    font-size: 4em;
                 }
             }
         }
@@ -176,7 +175,7 @@
             color: $primary;
             font-size: 1.5em;
             @media only screen and (min-width: 769px) {
-                font-size: 5vw;
+                font-size: 2em;
             }
         }
         p {
@@ -184,7 +183,7 @@
             font-size: 1em;
             margin: 15px 0 0 0;
             @media only screen and (min-width: 769px) {
-                font-size: 3vw;
+                font-size: 1.5em;
             }
         }
         .playButton {
@@ -250,7 +249,16 @@
                 background: transparent;
                 font-size: 2em;
                 text-align: center;
-                color: white;
+                color: $primary;
+                width: 100%;
+
+                @media only screen and (min-width: 769px) {
+                    font-size: 4em;
+                }
+
+                &::placeholder {
+                    color: rgba($primary, 0.5);
+                }
             }
         }
         p {
