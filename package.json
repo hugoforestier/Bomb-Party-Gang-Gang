@@ -30,7 +30,7 @@
     },
     "scripts": {
         "start": "SASS_PATH=$PWD/src/styles/ react-scripts start",
-        "build": "SASS_PATH=$PWD/scr/tyles react-scripts build",
+        "build": "SASS_PATH=$PWD/src/styles/ react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "lint": "./node_modules/.bin/eslint --ext .ts --ext .tsx ."
