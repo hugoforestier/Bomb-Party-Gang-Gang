@@ -122,6 +122,7 @@ function submitWord(client: WebSocketClientInfo, command: any): boolean {
   if (room.players[room.currentPlayer].userId != Number(client.info.authInfo!.user.id) || room.timeout === undefined) {
     return false;
   }
+  broadcastRoomInfo(room);
   if (!checkWord(word, statement)) {
     return false;
   }

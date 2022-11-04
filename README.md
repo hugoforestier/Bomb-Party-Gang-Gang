@@ -24,3 +24,26 @@ npx prisma migrate dev
 npm run build
 npm run start
 ```
+
+## Manage the Database
+
+You can create an sql file in order to later revert the database to a previously working one
+
+```bash
+npx prisma migrate diff \
+ --from-schema-datamodel prisma/schema.prisma \
+ --to-schema-datasource prisma/schema.prisma \
+ --script > down.sql
+```
+
+To revert the database to a previously working one you can do the following command:
+
+```bash
+npx prisma db execute --file ./down.sql --schema prisma/schema.prisma 
+```
+
+To change the current database, you'll need to modify the schema.prisma file and then do the following command:
+
+```bash
+npx prisma migrate dev --name nom_de_la_migration
+```

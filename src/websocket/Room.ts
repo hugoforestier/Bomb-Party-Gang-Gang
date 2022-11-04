@@ -18,6 +18,7 @@ export type RoomInfo = {
   users: UserInfo[];
   players: Player[];
   currentPlayer: number;
+  playerInput: string;
 };
 
 export type RoomInfoShort = {
