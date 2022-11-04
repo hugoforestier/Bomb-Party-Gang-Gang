@@ -106,7 +106,7 @@ function checkWord(word: string, statement: string) : boolean {
   if (!formatedWord.includes(statement)) {
     return false;
   }
-  if (!dictionary.includes(formatedWord)) {
+  if (!dictionary.includes(formatedWord + '\n')) {
     return false;
   }
   return true;
