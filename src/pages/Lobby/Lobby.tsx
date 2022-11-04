@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { faArrowRightFromBracket, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import styles from './Lobby.module.scss';
@@ -11,7 +11,6 @@ export default function Lobby() {
   const [selectedRoom, setSelectedRoom] = useState(-1);
   const [roomCreation, setRoomCreation] = useState(false);
   const [newRoomName, setNewRoomName] = useState('');
-  const inputReference = useRef(null);
   const { t } = useTranslation();
 
   const rooms = [
@@ -84,7 +83,6 @@ export default function Lobby() {
             </div>
             <div className={styles.instructions}>
               <input
-                ref={inputReference}
                 id="roomName"
                 type="text"
                 placeholder={t('TYPE NAME...')}
