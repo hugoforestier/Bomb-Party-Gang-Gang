@@ -12,7 +12,6 @@ import { RoomDetails } from '../../redux/reducers/websocket/types';
 import RoomInfoLobby from './RoomInfoLobby';
 import { ROOM_MAX_CAPACITY, SIGN_IN_URL } from '../../keys';
 import CreateRoomForm from './CreateRoomForm';
-import { removeAuthTokenFromClient } from '../../webClient';
 import { resetLoginReducer } from '../../redux/reducers/login/loginReducer';
 import { useAppDispatch } from '../../redux/types';
 import { useWebSocket } from '../../redux/reducers/websocket/connectionUtils';
@@ -41,7 +40,6 @@ export default function Lobby() {
   };
 
   const onLogout = () => {
-    removeAuthTokenFromClient();
     dispatch(resetLoginReducer());
     navigate(SIGN_IN_URL);
   };
