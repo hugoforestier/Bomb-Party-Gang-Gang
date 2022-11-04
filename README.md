@@ -18,7 +18,7 @@ You can start the project with the following commands:
 
 ```bash
 cp .env.example .env
-# then you can edit the .env adding the url of your database
+vim .env # edit the .env adding the url of your database
 npm install
 npx prisma migrate dev
 npm run build
