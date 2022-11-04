@@ -8,16 +8,12 @@ import TextButton from '../../components/buttons/TextButton/TextButton';
 import { ROOM_MAX_CAPACITY } from '../../keys';
 
 interface Props {
-  room: RoomDetails | undefined;
+  room: RoomDetails;
   closeMenu: () => any;
 }
 
 export default function RoomInfoLobby({ room, closeMenu }: Props) {
   const { t } = useTranslation();
-
-  if (room === undefined) {
-    return (<span />);
-  }
 
   const playerList = room.users.map((player) => (
     <p key={player.username}>{player.username}</p>

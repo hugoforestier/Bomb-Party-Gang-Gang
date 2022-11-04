@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import styles from './Lobby.module.scss';
 import RoomButton from '../../components/buttons/RoomButton/RoomButton';
 import TextButton from '../../components/buttons/TextButton/TextButton';
@@ -8,13 +9,18 @@ import IconButton from '../../components/buttons/IconButton/IconButton';
 import Separator from '../../components/separators/Separator/Separator';
 import { RoomDetails, RoomList } from '../../redux/reducers/websocket/types';
 import RoomInfoLobby from './RoomInfoLobby';
-import { ROOM_MAX_CAPACITY } from '../../keys';
+import { ROOM_MAX_CAPACITY, SIGN_IN_URL } from '../../keys';
 import CreateRoomForm from './CreateRoomForm';
+import { removeAuthTokenFromClient } from '../../webClient';
+import { resetLoginReducer } from '../../redux/reducers/login/loginReducer';
+import { useAppDispatch } from '../../redux/types';
 
 export default function Lobby() {
   const [selectedRoom, setSelectedRoom] = useState(undefined as RoomDetails | undefined);
   const [roomCreation, setRoomCreation] = useState(false);
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const rooms: RoomList = [
     { name: 'Room #0', users: [{ username: 'jamil', id: 1 }, { username: 'guillaume', id: 2 }, { username: 'hugo', id: 2 }] },
@@ -37,7 +43,11 @@ export default function Lobby() {
     }
   };
 
-  const handleLogout = () => {};
+  const onLogout = () => {
+    removeAuthTokenFromClient();
+    dispatch(resetLoginReducer());
+    navigate(SIGN_IN_URL);
+  };
 
   let roomButtons = rooms.map((room) => (
     <RoomButton
@@ -60,7 +70,7 @@ export default function Lobby() {
           <h1>Player52824</h1>
           <IconButton
             iconName={faArrowRightFromBracket}
-            onClick={handleLogout}
+            onClick={onLogout}
           />
         </div>
         <div className={styles.roomSelection}>
@@ -73,8 +83,9 @@ export default function Lobby() {
           <TextButton className={styles.playButton} label={t('CREATE ROOM')} onClick={() => setRoomCreation(true)} />
         </div>
       </div>
-      <RoomInfoLobby closeMenu={() => setSelectedRoom(undefined)} room={selectedRoom} />
-      <CreateRoomForm open={roomCreation} closeForm={() => setRoomCreation(false)} />
+      {selectedRoom !== undefined
+        && <RoomInfoLobby closeMenu={() => setSelectedRoom(undefined)} room={selectedRoom} />}
+      {roomCreation && <CreateRoomForm closeForm={() => setRoomCreation(false)} />}
     </div>
   );
 }

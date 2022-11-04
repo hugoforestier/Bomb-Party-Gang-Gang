@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import IconButton from '../../components/buttons/IconButton/IconButton';
@@ -7,20 +7,20 @@ import styles from './CreateRoomForm.module.scss';
 
 interface Props {
   closeForm: () => any;
-  open: boolean;
 }
 
-export default function CreateRoomForm({ closeForm, open }: Props) {
+export default function CreateRoomForm({ closeForm }: Props) {
   const { t } = useTranslation();
   const [roomName, setRoomName] = useState('');
+  const ref = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    ref.current?.focus();
+  }, [ref]);
 
   const createRoom = () => {
     console.log(roomName);
   };
-
-  if (!open) {
-    return (<span />);
-  }
 
   return (
     <div className={styles.creationRoomOverlay}>
@@ -30,6 +30,7 @@ export default function CreateRoomForm({ closeForm, open }: Props) {
       </div>
       <div className={styles.instructions}>
         <input
+          ref={ref}
           id="roomName"
           type="text"
           placeholder={t('TYPE NAME...')}
