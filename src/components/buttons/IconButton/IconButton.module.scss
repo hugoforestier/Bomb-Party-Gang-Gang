@@ -1,0 +1,20 @@
+@import 'base';
+
+.iconButton {
+  height: 60px;
+  width: 60px;
+  border-style: none;
+  outline-style: none;
+  border: solid 3px $primary;
+  font-size: 2em;
+  cursor: pointer;
+  background: transparent;
+  color: $secondary;
+  @media only screen and (min-width: 769px) {
+    height: 80px;
+    width: 80px;
+  }
+}
+.inverted {
+  color: $primary;
+}
