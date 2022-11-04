@@ -8,6 +8,7 @@ import IconButton from '../../components/buttons/IconButton/IconButton';
 import Separator from '../../components/separators/Separator/Separator';
 import { RoomDetails, RoomList } from '../../redux/reducers/websocket/types';
 import RoomInfoLobby from './RoomInfoLobby';
+import { ROOM_MAX_CAPACITY } from '../../keys';
 
 export default function Lobby() {
   const [selectedRoom, setSelectedRoom] = useState(undefined as RoomDetails | undefined);
@@ -29,7 +30,10 @@ export default function Lobby() {
     if (selectedRoom?.name === roomName) {
       setSelectedRoom(undefined);
     } else {
-      setSelectedRoom(rooms.find((room) => room.name === roomName));
+      const room = rooms.find((r) => r.name === roomName);
+      if ((room?.users.length ?? ROOM_MAX_CAPACITY) < ROOM_MAX_CAPACITY) {
+        setSelectedRoom(room);
+      }
     }
   };
 

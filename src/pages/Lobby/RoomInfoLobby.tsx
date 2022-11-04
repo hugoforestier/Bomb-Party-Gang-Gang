@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import IconButton from '../../components/buttons/IconButton/IconButton';
 import { RoomDetails } from '../../redux/reducers/websocket/types';
-import styles from './Lobby.module.scss';
+import styles from './RoomInfoLobby.module.scss';
 import TextButton from '../../components/buttons/TextButton/TextButton';
 import { ROOM_MAX_CAPACITY } from '../../keys';
 

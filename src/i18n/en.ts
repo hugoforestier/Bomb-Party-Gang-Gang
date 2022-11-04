@@ -16,7 +16,7 @@ const en = {
   userAlreadyExists: 'User already exists.',
   play: 'PLAY',
   players: 'PLAYERS',
-  noRoom: "There are no rooms to choose from,\nyou'll have to create your own :/",
+  noRoom: 'There are no rooms to choose from;\ncreate your own room.',
 };
 
 export default en;
