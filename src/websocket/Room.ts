@@ -18,6 +18,7 @@ export type RoomInfo = {
   users: UserInfo[];
   players: Player[];
   currentPlayer: number;
+  playerInput: string | null;
 };
 
 export type RoomInfoShort = {
@@ -40,9 +41,12 @@ export default class Room {
 
   timeout: NodeJS.Timeout | undefined;
 
+  playerInput: string | null;
+
   constructor(name: string, users: WebSocketClientInfo[]) {
     this.name = name;
     this.users = users;
+    this.playerInput = null;
   }
 
   isGameOver(): boolean {
@@ -108,6 +112,7 @@ export default class Room {
       players: [...this.players],
       started: this.started,
       currentPlayer: this.currentPlayer,
+      playerInput: this.playerInput, 
     };
   }
 

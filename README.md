@@ -12,6 +12,26 @@ docker run -e POSTGRES_PASSWORD=gang -e POSTGRES_DB=gang -e POSTGRES_USER=gang -
 
 Any values you put as password, db, user will have to be added to the env files in the [pre-start](./src/pre-start/) directory.
 
+To change the current database, you'll need to modify the schema.prisma file and then do the following command:
+
+```bash
+npx prisma migrate dev --name nom_de_la_migration
+```
+You can create an sql file in order to later revert the database to a previously working one
+
+```bash
+npx prisma migrate diff \
+ --from-schema-datamodel prisma/schema.prisma \
+ --to-schema-datasource prisma/schema.prisma \
+ --script > down.sql
+```
+
+To revert the database to a previously working one you can do the following command:
+
+```bash
+npx prisma db execute --file ./down.sql --schema prisma/schema.prisma 
+```
+
 ## Starting the project
 
 You can start the project with the following commands:
@@ -24,3 +44,6 @@ npx prisma migrate dev
 npm run build
 npm run start
 ```
+
+## Manage the Database
+
