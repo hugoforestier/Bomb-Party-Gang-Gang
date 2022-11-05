@@ -27,13 +27,12 @@ export default function Lobby() {
   const rooms = useAppSelector(getRoomList) ?? [];
   const username = useUsername(dispatch);
   const clientRoom = useAppSelector(getRoomInfo);
-  console.log(clientRoom);
 
   useEffect(() => {
     if (clientRoom === undefined || clientRoom === null) {
       return;
     }
-    navigate(`/room/${clientRoom.name}`);
+    navigate(`/room/${encodeURIComponent(clientRoom.name)}`);
   }, [navigate, clientRoom]);
 
   const toggleRoomSelect = (roomName: string) => {

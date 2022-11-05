@@ -35,7 +35,7 @@ function RoomButton({
       className={getRoomState()}
     >
       <p>{`${name}`}</p>
-      <p>{`${players.length}/${ROOM_MAX_CAPACITY}`}</p>
+      <p className={styles.count}>{`${players.length}/${ROOM_MAX_CAPACITY}`}</p>
     </button>
   );
 }

@@ -1,7 +1,7 @@
 import { combineReducers, PayloadAction } from '@reduxjs/toolkit';
 import { removeAuthTokenFromClient } from '../webClient';
 import loginReducer, { resetLoginReducer } from './reducers/login/loginReducer';
-import userReducer from './reducers/user/userReducer';
+import userReducer, { getUser } from './reducers/user/userReducer';
 import connectionReducer from './reducers/websocket/connectionReducer';
 import infoHandlerReducer from './reducers/websocket/infoHandlerReducer';
 
@@ -13,8 +13,10 @@ const reducers = combineReducers({
 });
 
 const rootReducers = (state: any, action: PayloadAction<any>) => {
-  if (action.type === resetLoginReducer().type) {
+  if (action.type === resetLoginReducer().type
+    || (action.type === getUser.rejected.type && action.payload === 401)) {
     removeAuthTokenFromClient();
+    window.location.reload();
     return reducers(undefined, action);
   }
   return reducers(state, action);

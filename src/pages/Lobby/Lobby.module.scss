@@ -45,21 +45,21 @@
                 }
             }
 
-            button {
-                border-style: none;
-                height: 50px;
-                width: 50px;
-                border: solid 5px $secondary;
-                background: transparent;
-                font-size: 1.3em;
-                cursor: pointer;
+            // button {
+            //     border-style: none;
+            //     height: 50px;
+            //     width: 50px;
+            //     border: solid 5px $secondary;
+            //     background: transparent;
+            //     font-size: 1.3em;
+            //     cursor: pointer;
 
-                @media only screen and (min-width: 769px) {
-                    color: $secondary;
-                    height: 70px;
-                    width: 70px;
-                }
-            }
+            //     @media only screen and (min-width: 769px) {
+            //         color: $secondary;
+            //         height: 70px;
+            //         width: 70px;
+            //     }
+            // }
         }
 
         .roomSelection {

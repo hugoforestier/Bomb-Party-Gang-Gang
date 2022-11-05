@@ -40,7 +40,7 @@ const slice = createSlice({
       state.status = 'loading';
       ws.onopen = () => {
         // we need to set a short timeout so that the function is called after onopen has returned
-        setTimeout(() => action.payload.dispatch(slice.actions.connected()), 10);
+        setTimeout(() => action.payload.dispatch(slice.actions.connected()), 20);
         const jwt = localStorage.getItem(JWT_LOCAL_STORAGE);
         ws.send(JSON.stringify({ jwt }));
       };

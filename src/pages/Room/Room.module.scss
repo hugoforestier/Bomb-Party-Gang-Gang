@@ -1,0 +1,62 @@
+@import 'base';
+
+.roomTitleBar {
+    display: flex;
+
+    h1 {
+        color: $secondary;
+        height: 1.25em;
+        font-size: 3em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin: auto 0;
+        padding-left: 20px;
+    }
+}
+
+.wrapper {
+    height: 100vh;
+    max-width: 100%;
+    background: $primary;
+    display: flex;
+
+    .main {
+        padding: 32px;
+        width: 100%;
+        display: none;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        @media all and (min-width: 1025px) {
+            display: unset;
+        }
+    }
+
+    .playerList {
+        padding: 32px;
+        width: 100%;
+        background: $secondary;
+        color: $primary;
+
+        @media all and (min-width: 1025px) {
+            width: 400px;
+            min-width: 400px;
+        }
+
+        @media all and (min-width: 1600px) {
+            width: 700px;
+            min-width: 700px;
+        }
+
+        .roomTitleBar {
+            h1 {
+                color: $primary;
+            }
+
+            @media all and (min-width: 1025px) {
+                display: none;
+            }            
+        }
+    }
+}

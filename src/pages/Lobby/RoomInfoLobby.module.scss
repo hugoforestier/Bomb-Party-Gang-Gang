@@ -24,6 +24,9 @@
             color: $primary;
             font-size: 2.5em;
             margin: 0 0 0 50px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
 
             @media only screen and (min-width: 769px) {
                 font-size: 4em;

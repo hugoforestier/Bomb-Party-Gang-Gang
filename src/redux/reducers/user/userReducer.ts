@@ -26,7 +26,7 @@ interface GetUserResponse {
 
 export const getUser = createAsyncThunk<User, undefined, {
   rejectValue: number,
-}>(`${name}/login`, (args, thunk) => client.get<GetUserResponse>('/user')
+}>(`${name}/getUser`, (args, thunk) => client.get<GetUserResponse>('/user')
   .then((res) => res.data.user)
   .catch((err) => {
     if (axios.isAxiosError(err) && err.response?.status !== undefined) {

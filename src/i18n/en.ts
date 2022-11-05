@@ -17,6 +17,7 @@ const en = {
   play: 'PLAY',
   players: 'PLAYERS',
   noRoom: 'There are no rooms to choose from;\ncreate your own room.',
+  loading: 'LOADING...',
 };
 
 export default en;
