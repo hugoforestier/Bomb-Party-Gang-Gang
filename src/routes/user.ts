@@ -78,9 +78,9 @@ router.get(
       user: {
         username: user.username,
         id: Number(user.id),
-      }
+      },
     });
-  }
+  },
 );
 
 export default router;

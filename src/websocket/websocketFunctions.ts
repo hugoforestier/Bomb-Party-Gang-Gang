@@ -101,7 +101,7 @@ function startGame(client: WebSocketClientInfo): boolean {
   return true;
 }
 
-function checkWord(word: string, statement: string) : boolean {
+function checkWord(word: string, statement: string): boolean {
   const formatedWord = word.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   if (!formatedWord.includes(statement)) {
     return false;
@@ -122,11 +122,11 @@ function submitWord(client: WebSocketClientInfo, command: any): boolean {
   if (room.players[room.currentPlayer].userId != Number(client.info.authInfo!.user.id) || room.timeout === undefined) {
     return false;
   }
-  broadcastRoomInfo(room);
   if (!checkWord(word, statement)) {
     return false;
   }
   room.nextTurn(0);
+  broadcastRoomInfo(room);
   clearTimeout(room.timeout);
   startClock(room);
   return true;
@@ -135,12 +135,16 @@ function submitWord(client: WebSocketClientInfo, command: any): boolean {
 function joinRoom(client: WebSocketClientInfo, command: any): boolean {
   const name = command.name;
   const room = getRoom(name);
-  if (room === null) {
+  if (room === null || room.users.find(user => user.info.authInfo!.user.id === client.info.authInfo!.user.id)) {
     return false;
   }
 
   client.info.authInfo!.roomName = name;
   room.users.push(client);
+
+  if (room.deleteTimeout) {
+    clearTimeout(room.deleteTimeout);
+  }
 
   broadcastRoomList();
   broadcastRoomInfo(room);
@@ -174,12 +178,14 @@ function leaveRoom(client: WebSocketClientInfo): boolean {
   client.info.authInfo!.roomName = undefined;
   notifyPlayerLeftRoom(client);
   if (room.users.length === 0) {
-    delete rooms[name as string];
+    room.deleteTimeout = setTimeout(() => {
+      delete rooms[name as string];
+      broadcastRoomList();
+    }, 60000);
   } else {
     broadcastRoomInfo(room);
+    broadcastRoomList();
   }
-
-  broadcastRoomList();
 
   return true;
 }

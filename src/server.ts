@@ -1,6 +1,6 @@
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
 import helmet from 'helmet';
 import StatusCodes from 'http-status-codes';
@@ -13,7 +13,7 @@ import passport from './pre-start/passport/passport.init';
 const app = express();
 
 passport(app);
-const { BAD_REQUEST } = StatusCodes;
+const { INTERNAL_SERVER_ERROR } = StatusCodes;
 
 /** **********************************************************************************
  *                              Set basic express settings
@@ -42,13 +42,15 @@ if (process.env.NODE_ENV === 'production') {
 app.use('/', BaseRouter);
 app.use('/user', UserRouter);
 
-// TODO If bad request server crashes here
-app.use((err: Error, req: Request, res: Response) => {
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.log(req.resume);
   logger.err(err, true);
-  return res.status(BAD_REQUEST).json({
+  return res.status(INTERNAL_SERVER_ERROR).json({
     error: err.message,
   });
+
+  // dead code to remove linter warning
+  next();
 });
 
 export default app;

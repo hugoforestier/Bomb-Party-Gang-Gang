@@ -41,6 +41,8 @@ export default class Room {
 
   timeout: NodeJS.Timeout | undefined;
 
+  deleteTimeout: NodeJS.Timeout | undefined;
+
   playerInput: string | null;
 
   constructor(name: string, users: WebSocketClientInfo[]) {
