@@ -15,6 +15,8 @@ export type Room = {
   lastWinner: UserInfo | null;
   users: UserInfo[];
   players: Player[];
+  currentPlayer: number;
+  playerInput: string | null;
 };
 
 export type RoomDetails = {
