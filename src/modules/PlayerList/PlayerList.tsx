@@ -10,8 +10,6 @@ interface Props {
   users: UserInfo[];
   players?: Player[];
   showPlayers?: boolean;
-  children?: React.ReactNode;
-  button?: React.ReactNode;
 }
 
 function CheckMark({ checked }: { checked: boolean }) {
@@ -23,7 +21,7 @@ function CheckMark({ checked }: { checked: boolean }) {
 }
 
 export default function PlayerList({
-  children, users, players, showPlayers, button,
+  users, players, showPlayers,
 }: Props) {
   const { t } = useTranslation();
 
@@ -43,7 +41,6 @@ export default function PlayerList({
 
   return (
     <div className={styles.list}>
-      {children}
       <h1 className={styles.title}>
         {t('players')}
       </h1>
@@ -55,7 +52,6 @@ export default function PlayerList({
       <div className={styles.playerList}>
         {userList}
       </div>
-      {button}
     </div>
   );
 }
@@ -63,6 +59,4 @@ export default function PlayerList({
 PlayerList.defaultProps = {
   showPlayers: false,
   players: undefined,
-  children: undefined,
-  button: undefined,
 };

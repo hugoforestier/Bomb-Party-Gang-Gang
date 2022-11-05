@@ -18,6 +18,8 @@ const en = {
   players: 'PLAYERS',
   noRoom: 'There are no rooms to choose from;\ncreate your own room.',
   loading: 'LOADING...',
+  ready: 'READY UP',
+  unready: "WAIT I'M NOT READY",
 };
 
 export default en;

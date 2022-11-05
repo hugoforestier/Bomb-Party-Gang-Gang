@@ -1,11 +1,13 @@
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react';
-/* import { useTranslation } from 'react-i18next'; */
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 import IconButton from '../../components/buttons/IconButton/IconButton';
+import TextButton from '../../components/buttons/TextButton/TextButton';
 import { ROOM_MAX_CAPACITY, SIGN_IN_URL } from '../../keys';
 import PlayerList from '../../modules/PlayerList/PlayerList';
 import { resetLoginReducer } from '../../redux/reducers/login/loginReducer';
+import { useUserId } from '../../redux/reducers/user/userUtils';
 import { getWsConnectionStatus, useWebSocket } from '../../redux/reducers/websocket/connectionUtils';
 import { getRoomInfo, getRoomList } from '../../redux/reducers/websocket/infoHandlerUtils';
 import { useAppDispatch, useAppSelector } from '../../redux/types';
@@ -22,7 +24,24 @@ export default function Room() {
   const roomList = useAppSelector(getRoomList);
   const [joining, setJoining] = useState(false);
   const [leaving, setLeaving] = useState(false);
-  /*   const { t } = useTranslation(); */
+  const { t } = useTranslation();
+  const userId = useUserId(dispatch);
+
+  const userIsReady = (clientRoom?.players.find((p) => p.userId === userId) !== undefined) ?? false;
+
+  const readyButton = (
+    <TextButton
+      className={styles.readyButton}
+      label={userIsReady ? t('unready') : t('ready')}
+      filled={!userIsReady ?? false}
+      onClick={() => {
+        ws?.send(JSON.stringify({
+          command: 'setReady',
+          isReady: !userIsReady,
+        }));
+      }}
+    />
+  );
 
   useEffect(() => {
     if (wsStatus === 'error') {
@@ -88,16 +107,19 @@ export default function Room() {
     <div className={styles.wrapper}>
       <div className={styles.main}>
         {roomHeader(false)}
-        {JSON.stringify(clientRoom)}
+        {readyButton}
+        {userIsReady
+          ? <div />
+          : <div />}
       </div>
       <div className={styles.playerList}>
+        {roomHeader(true)}
         <PlayerList
           users={clientRoom.users}
           players={clientRoom.players}
           showPlayers={clientRoom.started}
-        >
-          {roomHeader(true)}
-        </PlayerList>
+        />
+        {readyButton}
       </div>
     </div>
   );

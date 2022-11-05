@@ -20,6 +20,8 @@ const fr: typeof en = {
   players: 'JOUEURS',
   noRoom: "Il n'y a pas de rooms, il faudra que tu crées la tienne :/",
   loading: 'EN COURS DE CHARGEMENT...',
+  ready: 'PRET',
+  unready: 'JE NE SUIS PAS PRET',
 };
 
 export default fr;
