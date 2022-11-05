@@ -6,6 +6,8 @@ import { RoomDetails } from '../../redux/reducers/websocket/types';
 import styles from './RoomInfoLobby.module.scss';
 import TextButton from '../../components/buttons/TextButton/TextButton';
 import { ROOM_MAX_CAPACITY } from '../../keys';
+import { useAppDispatch } from '../../redux/types';
+import { useWebSocket } from '../../redux/reducers/websocket/connectionUtils';
 
 interface Props {
   room: RoomDetails;
@@ -14,6 +16,14 @@ interface Props {
 
 export default function RoomInfoLobby({ room, closeMenu }: Props) {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const ws = useWebSocket(dispatch);
+  const joinRoom = () => {
+    ws!.send(JSON.stringify({
+      command: 'joinRoom',
+      name: room.name,
+    }));
+  };
 
   const playerList = room.users.map((player) => (
     <p key={player.username}>{player.username}</p>
@@ -32,7 +42,7 @@ export default function RoomInfoLobby({ room, closeMenu }: Props) {
         {ROOM_MAX_CAPACITY}
       </h2>
       {playerList}
-      <TextButton className={styles.playButton} label={t('play')} />
+      <TextButton className={styles.playButton} label={t('play')} onClick={joinRoom} />
     </div>
   );
 }

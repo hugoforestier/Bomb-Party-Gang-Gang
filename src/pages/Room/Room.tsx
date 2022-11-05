@@ -44,7 +44,7 @@ export default function Room() {
 
   return (
     <div>
-      {name}
+      {JSON.stringify(clientRoom)}
     </div>
   );
 }
