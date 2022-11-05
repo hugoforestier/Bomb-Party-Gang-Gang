@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { WS_URL, JWT_LOCAL_STORAGE } from '../../../keys';
 import { Status } from '../utils';
-import { infoRoom, noRoom, rooms } from './infoHandlerReducer';
+import { roomInfo, noRoom, rooms } from './infoHandlerReducer';
 
 const infoActions = {
   rooms,
-  infoRoom,
+  roomInfo,
   noRoom,
 };
 

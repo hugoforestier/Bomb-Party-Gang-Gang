@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import styles from './Lobby.module.scss';
 import RoomButton from '../../components/buttons/RoomButton/RoomButton';
 import TextButton from '../../components/buttons/TextButton/TextButton';
@@ -13,9 +12,9 @@ import RoomInfoLobby from './RoomInfoLobby';
 import { ROOM_MAX_CAPACITY, SIGN_IN_URL } from '../../keys';
 import CreateRoomForm from './CreateRoomForm';
 import { resetLoginReducer } from '../../redux/reducers/login/loginReducer';
-import { useAppDispatch } from '../../redux/types';
+import { useAppDispatch, useAppSelector } from '../../redux/types';
 import { useWebSocket } from '../../redux/reducers/websocket/connectionUtils';
-import { getRoomList } from '../../redux/reducers/websocket/infoHandlerUtils';
+import { getRoomInfo, getRoomList } from '../../redux/reducers/websocket/infoHandlerUtils';
 import { useUsername } from '../../redux/reducers/user/userUtils';
 
 export default function Lobby() {
@@ -25,8 +24,17 @@ export default function Lobby() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   useWebSocket(dispatch);
-  const rooms = useSelector(getRoomList);
+  const rooms = useAppSelector(getRoomList) ?? [];
   const username = useUsername(dispatch);
+  const clientRoom = useAppSelector(getRoomInfo);
+  console.log(clientRoom);
+
+  useEffect(() => {
+    if (clientRoom === undefined || clientRoom === null) {
+      return;
+    }
+    navigate(`/room/${clientRoom.name}`);
+  }, [navigate, clientRoom]);
 
   const toggleRoomSelect = (roomName: string) => {
     if (selectedRoom?.name === roomName) {

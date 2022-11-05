@@ -7,6 +7,7 @@ import SignIn from './pages/SignIn/SignIn';
 import SignUp from './pages/SignUp/SignUp';
 import PageNotFound from './pages/PageNotFound';
 import Lobby from './pages/Lobby/Lobby';
+import Room from './pages/Room/Room';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route element={<ProtectedRoute loggedIn redirectTo="/signin" />}>
             <Route element={<Lobby />} path="/lobby" />
+            <Route element={<Room />} path="/room/:name" />
           </Route>
           <Route element={<Navigate to="/lobby" replace />} path="/" />
           <Route element={<ProtectedRoute loggedIn={false} redirectTo="/lobby" />}>
