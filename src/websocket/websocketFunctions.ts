@@ -184,8 +184,8 @@ function leaveRoom(client: WebSocketClientInfo): boolean {
     }, 60000);
   } else {
     broadcastRoomInfo(room);
-    broadcastRoomList();
   }
+  broadcastRoomList();
 
   return true;
 }
