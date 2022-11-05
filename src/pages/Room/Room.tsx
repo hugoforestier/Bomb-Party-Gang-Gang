@@ -1,8 +1,10 @@
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react';
+/* import { useTranslation } from 'react-i18next'; */
 import { useNavigate, useParams } from 'react-router-dom';
 import IconButton from '../../components/buttons/IconButton/IconButton';
 import { ROOM_MAX_CAPACITY, SIGN_IN_URL } from '../../keys';
+import PlayerList from '../../modules/PlayerList/PlayerList';
 import { resetLoginReducer } from '../../redux/reducers/login/loginReducer';
 import { getWsConnectionStatus, useWebSocket } from '../../redux/reducers/websocket/connectionUtils';
 import { getRoomInfo, getRoomList } from '../../redux/reducers/websocket/infoHandlerUtils';
@@ -20,6 +22,7 @@ export default function Room() {
   const roomList = useAppSelector(getRoomList);
   const [joining, setJoining] = useState(false);
   const [leaving, setLeaving] = useState(false);
+  /*   const { t } = useTranslation(); */
 
   useEffect(() => {
     if (wsStatus === 'error') {
@@ -88,8 +91,13 @@ export default function Room() {
         {JSON.stringify(clientRoom)}
       </div>
       <div className={styles.playerList}>
-        {roomHeader(true)}
-        {JSON.stringify(clientRoom.users)}
+        <PlayerList
+          users={clientRoom.users}
+          players={clientRoom.players}
+          showPlayers={clientRoom.started}
+        >
+          {roomHeader(true)}
+        </PlayerList>
       </div>
     </div>
   );

@@ -1,0 +1,80 @@
+@import 'base';
+
+.checkmark {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border: 3px solid $primary;
+    margin-right: 10px;
+
+    @media all and (min-width: 769px) {
+        width: 30px;
+        height: 30px;
+    }
+
+    @media all and (min-width: 1025px) {
+        margin-right: 0;
+    }
+
+    svg {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        left: -5px;
+        top: -10px;
+
+        @media all and (min-width: 769px) {
+            left: -7px;
+            top: -15px;
+            width: 50px;
+            height: 50px;
+        }
+    }
+}
+
+.list {
+    .title {
+        font-size: 2em;
+        width: 100%;
+        margin-top: 20px;
+
+        @media all and (min-width: 769px) {
+            font-size: 3em;
+        }
+    }
+
+    .playerCount {
+        color: $grey;
+        font-size: 1.5em;
+        margin-bottom: 20px;
+
+        @media all and (min-width: 769px) {
+            font-size: 3em;
+        }
+    }
+
+    .playerList {
+
+        .player {
+            display: flex;
+            margin-bottom: 15px;
+
+            @media all and (min-width: 769px) {
+                font-size: 1.5em;
+            }
+
+            @media all and (min-width: 1025px) {
+                flex-direction: row-reverse;
+            }
+
+            .username {
+                margin: auto 0;
+
+                @media all and (min-width: 1025px) {
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+
+}

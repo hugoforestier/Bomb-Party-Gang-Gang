@@ -3,7 +3,7 @@ export type UserInfo = {
   username: string;
 };
 
-interface Player {
+export interface Player {
   userId: number;
   lives: number;
   username: string;

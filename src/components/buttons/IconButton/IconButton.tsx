@@ -7,13 +7,15 @@ export interface IconButtonProps {
   iconName: IconDefinition;
   inverted?: boolean;
   onClick: () => any;
+  className?: string,
 }
 
 function IconButton({
-  iconName, inverted, onClick,
+  iconName, inverted, onClick, className,
 }: IconButtonProps) {
   let buttonClass = `${styles.iconButton}`;
   buttonClass += inverted ? ` ${styles.inverted}` : '';
+  buttonClass += className ? ` ${className}` : '';
 
   return (
     <button
@@ -28,6 +30,7 @@ function IconButton({
 
 IconButton.defaultProps = {
   inverted: false,
+  className: undefined,
 };
 
 export default IconButton;
