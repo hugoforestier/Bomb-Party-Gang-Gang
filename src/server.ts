@@ -42,10 +42,16 @@ if (process.env.NODE_ENV === 'production') {
 app.use('/', BaseRouter);
 app.use('/user', UserRouter);
 
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.log(req.resume);
   logger.err(err, true);
-  return res.status(INTERNAL_SERVER_ERROR).json({
+
+  let status = INTERNAL_SERVER_ERROR;
+  if (err.status) {
+    status = err.status;
+  }
+  
+  return res.status(status).json({
     error: err.message,
   });
 
