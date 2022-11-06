@@ -4,6 +4,7 @@ import { WebSocketClientInfo } from './types';
 import { readFileSync } from 'fs';
 
 const dictionary = readFileSync('./dictionary/fr.txt', 'utf-8');
+const statements = readFileSync('./dictionary/statements.txt', 'utf-8').split('\n');
 
 export const rooms: {
   [key: string]: Room
@@ -65,7 +66,7 @@ function getRoom(roomName: any): Room | null {
 
 function setReady(client: WebSocketClientInfo, command: any): boolean {
   const isReady: boolean = command.isReady;
-  if (typeof isReady !== 'boolean') {
+  if (typeof isReady !== 'string') {
     return false;
   }
   const room = getRoom(client.info.authInfo!.roomName);
@@ -76,15 +77,28 @@ function setReady(client: WebSocketClientInfo, command: any): boolean {
   return true;
 }
 
+function getNewStatement() : string {
+  let randomNumber = Math.floor(Math.random() * (statements.length - 1));
+  if (randomNumber == 0) {
+    randomNumber = 1
+  }
+  return statements[randomNumber];
+}
+
 function startClock(room: Room) {
   if (!room.started)
     return;
   room.timeout = setTimeout(function () {
+    if (room.failsUntilChange > 1) {
+      room.statement = getNewStatement();
+      room.failsUntilChange = 0;
+    }
+    room.failsUntilChange+=1;
     room.nextTurn(1);
     broadcastRoomInfo(room);
     if (room.started)
       startClock(room);
-  }, 15000);
+  }, 1000000); // TODO change to 15000 again 
 }
 
 function startGame(client: WebSocketClientInfo): boolean {
@@ -96,13 +110,18 @@ function startGame(client: WebSocketClientInfo): boolean {
     return false;
   }
   room.started = true;
+  room.currentPlayer = 0;
+  room.statement = getNewStatement();
   startClock(room);
   broadcastRoomInfo(room);
   return true;
 }
 
-function checkWord(word: string, statement: string): boolean {
+function checkWord(word: string, statement: string | null): boolean {
   const formatedWord = word.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  if (statement == null) {
+    return true;
+  }
   if (!formatedWord.includes(statement)) {
     return false;
   }
@@ -115,20 +134,20 @@ function checkWord(word: string, statement: string): boolean {
 function submitWord(client: WebSocketClientInfo, command: any): boolean {
   const room = getRoom(client.info.authInfo!.roomName);
   const word = command.word;
-  const statement = command.statement;
-  if (!room || !room.started || typeof word != 'string' || typeof statement != 'string') {
+  if (!room || !room.started || typeof word != 'string') {
     return false;
   }
   if (room.players[room.currentPlayer].userId != Number(client.info.authInfo!.user.id) || room.timeout === undefined) {
     return false;
   }
-  if (!checkWord(word, statement)) {
+  if (!checkWord(word, room.statement)) {
     return false;
   }
   room.nextTurn(0);
-  broadcastRoomInfo(room);
   clearTimeout(room.timeout);
+  room.statement = getNewStatement();
   startClock(room);
+  broadcastRoomInfo(room);
   return true;
 }
 
@@ -136,6 +155,10 @@ function joinRoom(client: WebSocketClientInfo, command: any): boolean {
   const name = command.name;
   const room = getRoom(name);
   if (room === null || room.users.find(user => user.info.authInfo!.user.id === client.info.authInfo!.user.id)) {
+    return false;
+  }
+
+  if (room.users.length >= 5) {
     return false;
   }
 
@@ -177,7 +200,6 @@ function leaveRoom(client: WebSocketClientInfo): boolean {
   if (room.started === false) {
     room.players = room.players.filter(p => p.userId !== Number(client.info.authInfo!.user.id));
   }
-  console.log(room);
 
   client.info.authInfo!.roomName = undefined;
   notifyPlayerLeftRoom(client);
