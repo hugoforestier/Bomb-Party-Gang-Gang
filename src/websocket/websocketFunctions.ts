@@ -80,7 +80,7 @@ function setReady(client: WebSocketClientInfo, command: any): boolean {
 function getNewStatement() : string {
   let randomNumber = Math.floor(Math.random() * (statements.length - 1));
   if (randomNumber == 0) {
-    randomNumber = 1
+    randomNumber = 1;
   }
   return statements[randomNumber];
 }
@@ -93,7 +93,7 @@ function startClock(room: Room) {
       room.statement = getNewStatement();
       room.failsUntilChange = 0;
     }
-    room.failsUntilChange+=1;
+    room.failsUntilChange += 1;
     room.nextTurn(1);
     broadcastRoomInfo(room);
     if (room.started)
