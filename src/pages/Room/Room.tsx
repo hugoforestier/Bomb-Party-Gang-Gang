@@ -128,7 +128,7 @@ export default function Room() {
         <PlayerList
           users={clientRoom.users}
           players={clientRoom.players}
-          showPlayers={clientRoom.started}
+          showPlayers={clientRoom?.started}
         />
         {readyButton}
         {startButton}

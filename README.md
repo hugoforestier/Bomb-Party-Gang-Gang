@@ -26,3 +26,5 @@ npm install
 npm run build
 serve -s build
 ```
+
+You can then access your sever on [http://localhost:3000]()

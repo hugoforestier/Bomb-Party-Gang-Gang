@@ -1,6 +1,8 @@
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import {
+  faArrowLeft, faCheck, faHeart, faSkull,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTranslation } from 'react-i18next';
 import { ROOM_MAX_CAPACITY } from '../../keys';
 import { UserInfo, Player } from '../../redux/reducers/websocket/types';
@@ -10,6 +12,7 @@ interface Props {
   users: UserInfo[];
   players?: Player[];
   showPlayers?: boolean;
+  currentTurn?: number;
 }
 
 function CheckMark({ checked }: { checked: boolean }) {
@@ -20,21 +23,50 @@ function CheckMark({ checked }: { checked: boolean }) {
   );
 }
 
+function Heart({ lives }: {
+  lives: number
+}) {
+  if (lives === 0) {
+    return (
+      <div className={styles.lives}>
+        <FontAwesomeIcon icon={faSkull} />
+      </div>
+    );
+  }
+  return (
+    <div className={styles.heartCounter}>
+      <div className={styles.lives}>
+        {lives}
+      </div>
+      <FontAwesomeIcon icon={faHeart} />
+    </div>
+  );
+}
+
 export default function PlayerList({
-  users, players, showPlayers,
+  users, players, showPlayers, currentTurn,
 }: Props) {
   const { t } = useTranslation();
-
-  if (showPlayers) {
-    return (<div />);
-  }
 
   const userList = users.map((user) => (
     <div key={user.id} className={styles.player}>
       {players !== undefined
-      && <CheckMark checked={players.find((p) => p.userId === user.id) !== undefined} /> }
+        && <CheckMark checked={players.find((p) => p.userId === user.id) !== undefined} />}
       <div className={styles.username}>
         {user.username}
+      </div>
+    </div>
+  ));
+
+  const playerList = players?.map((player, index) => (
+    <div key={player.userId} className={styles.player}>
+      <div className={styles.turnArrow}>
+        {currentTurn === index
+          && <FontAwesomeIcon icon={faArrowLeft} />}
+      </div>
+      <Heart lives={player.lives} />
+      <div className={styles.username}>
+        {player.username}
       </div>
     </div>
   ));
@@ -50,7 +82,9 @@ export default function PlayerList({
         {ROOM_MAX_CAPACITY}
       </h2>
       <div className={styles.playerList}>
-        {userList}
+        {showPlayers
+          ? playerList
+          : userList}
       </div>
     </div>
   );
@@ -59,4 +93,5 @@ export default function PlayerList({
 PlayerList.defaultProps = {
   showPlayers: false,
   players: undefined,
+  currentTurn: 0,
 };

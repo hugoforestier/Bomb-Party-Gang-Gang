@@ -32,6 +32,37 @@
     }
 }
 
+.heartCounter {
+    position: relative;
+    margin-right: 10px;
+
+    .lives {
+        position: absolute;
+        color: $secondary;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,calc(-50% - 3px));
+        font-weight: 900;
+        font-size: 0.8em;
+    }
+
+    svg {
+        height: 1.2em;
+        width: 1.2em;
+    }
+}
+
+.turnArrow {
+    height: 1.2em;
+    width: 1.2em;
+
+
+    svg {
+        height: 100%;
+        width: 100%;
+    }
+}
+
 .list {
     .title {
         font-size: 2em;
