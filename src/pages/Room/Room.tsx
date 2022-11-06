@@ -1,5 +1,4 @@
-import { faArrowRightFromBracket, faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -14,6 +13,7 @@ import { getRoomInfo, getRoomList } from '../../redux/reducers/websocket/infoHan
 import { useAppDispatch, useAppSelector } from '../../redux/types';
 import Loading from './Loading';
 import styles from './Room.module.scss';
+import WinnerScreen from './WinnerScreen';
 
 export default function Room() {
   const { name } = useParams();
@@ -127,7 +127,7 @@ export default function Room() {
   let content: React.ReactNode | undefined;
   let showMain = false;
 
-  if (clientRoom.started === false && !showWinner) {
+  if (clientRoom.started === false && showWinner) {
     content = (
       <>
         {readyButton}
@@ -137,32 +137,17 @@ export default function Room() {
   } else if (clientRoom.started === false) {
     showMain = true;
     if (clientRoom.lastWinner === null) {
-      setShowWinner(false);
-      return (
-        <div />
-      );
+      /* setShowWinner(false);
+       * return (
+       *   <div />
+       * ); */
     }
     content = (
-      <>
-        <div className={styles.user}>
-          <h1 className={styles.username}>
-            {clientRoom.lastWinner.username}
-            <br />
-            {clientRoom.lastWinner.id === userId
-            && t('you')}
-          </h1>
-          <FontAwesomeIcon icon={faUserCircle} className={styles.userIcon} />
-          <h1 className={styles.username}>
-            {t('won')}
-          </h1>
-        </div>
-        <TextButton
-          label={clientRoom.lastWinner.id === userId ? t('yay') : t('whatever')}
-          className={styles.winnerButton}
-          onClick={() => setShowWinner(false)}
-        />
-        <div />
-      </>
+      <WinnerScreen
+        userId={userId ?? -1}
+        winner={clientRoom.users[0]}
+        onClose={() => setShowWinner(false)}
+      />
     );
   }
 

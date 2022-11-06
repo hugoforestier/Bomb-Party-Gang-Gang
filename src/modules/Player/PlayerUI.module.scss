@@ -1,0 +1,26 @@
+@import 'base';
+
+.user {
+    color: $secondary;
+    width: 100%;
+    text-align: center;
+
+    .username {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .userIcon {
+        width: 96px;
+        height: 96px;
+        margin: 20px 0;
+    }
+
+    .heart {
+        width: 32px;
+        height: 32px;
+        margin: 0 5px;
+    }
+
+}
