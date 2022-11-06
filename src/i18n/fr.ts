@@ -22,6 +22,8 @@ const fr: typeof en = {
   loading: 'EN COURS DE CHARGEMENT...',
   ready: 'PRET',
   unready: 'JE NE SUIS PAS PRET',
+  waitingForUsers: "En attente d'autres joueurs...",
+  start: 'START',
 };
 
 export default fr;

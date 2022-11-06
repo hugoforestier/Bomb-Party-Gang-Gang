@@ -31,9 +31,9 @@ export default function Room() {
 
   const readyButton = (
     <TextButton
-      className={styles.readyButton}
+      className={`${styles.readyButton} ${userIsReady ? styles.filledButton : ''}`}
       label={userIsReady ? t('unready') : t('ready')}
-      filled={!userIsReady ?? false}
+      filled={!userIsReady}
       onClick={() => {
         ws?.send(JSON.stringify({
           command: 'setReady',
@@ -103,14 +103,25 @@ export default function Room() {
     </div>
   );
 
+  let startButton = <div className={styles.waiting} />;
+  if (userIsReady && clientRoom.players.length === 1) {
+    startButton = (
+      <div className={styles.waiting}>
+        {t('waitingForUsers')}
+      </div>
+    );
+  } else if (userIsReady) {
+    startButton = (
+      <TextButton className={styles.start} label={t('start')} />
+    );
+  }
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.main}>
         {roomHeader(false)}
         {readyButton}
-        {userIsReady
-          ? <div />
-          : <div />}
+        {startButton}
       </div>
       <div className={styles.playerList}>
         {roomHeader(true)}
@@ -120,6 +131,7 @@ export default function Room() {
           showPlayers={clientRoom.started}
         />
         {readyButton}
+        {startButton}
       </div>
     </div>
   );

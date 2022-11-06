@@ -20,6 +20,8 @@ const en = {
   loading: 'LOADING...',
   ready: 'READY UP',
   unready: "WAIT I'M NOT READY",
+  waitingForUsers: 'Waiting for other players...',
+  start: 'LET\'S GO',
 };
 
 export default en;
