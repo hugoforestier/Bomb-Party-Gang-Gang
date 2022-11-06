@@ -148,3 +148,43 @@
 
     }
 }
+
+.showMain {
+    .main {
+        display: flex;
+    }
+
+    .user {
+        color: $secondary;
+        width: 100%;
+        text-align: center;
+
+        .username {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .userIcon {
+            width: 96px;
+            height: 96px;
+            margin: 20px 0;
+        }
+
+    }
+
+    .winnerButton {
+        width: 500px;
+        font-size: 3em;
+        height: 2em;
+        margin: 0 auto;
+    }
+
+    .playerList {
+        display: none;
+
+        @media all and (min-width: 1025px) {
+            display: flex;
+        }
+    }
+}

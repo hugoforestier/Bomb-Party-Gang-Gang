@@ -24,6 +24,10 @@ const fr: typeof en = {
   unready: 'JE NE SUIS PAS PRET',
   waitingForUsers: "En attente d'autres joueurs...",
   start: 'START',
+  you: '(TOI)',
+  won: 'A GAGNÉ!',
+  yay: 'YAY!!!',
+  whatever: 'M\'EN FOU.',
 };
 
 export default fr;

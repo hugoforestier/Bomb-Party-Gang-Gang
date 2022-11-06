@@ -1,4 +1,5 @@
-import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRightFromBracket, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -26,6 +27,7 @@ export default function Room() {
   const [leaving, setLeaving] = useState(false);
   const { t } = useTranslation();
   const userId = useUserId(dispatch);
+  const [showWinner, setShowWinner] = useState(false);
 
   const userIsReady = (clientRoom?.players.find((p) => p.userId === userId) !== undefined) ?? false;
 
@@ -49,6 +51,12 @@ export default function Room() {
       navigate(SIGN_IN_URL);
     }
   }, [wsStatus, dispatch, navigate]);
+
+  useEffect(() => {
+    if (clientRoom?.started) {
+      setShowWinner(true);
+    }
+  }, [clientRoom]);
 
   useEffect(() => {
     if (roomList !== undefined && clientRoom === null && ws !== null) {
@@ -116,12 +124,53 @@ export default function Room() {
     );
   }
 
-  return (
-    <div className={styles.wrapper}>
-      <div className={styles.main}>
-        {roomHeader(false)}
+  let content: React.ReactNode | undefined;
+  let showMain = false;
+
+  if (clientRoom.started === false && !showWinner) {
+    content = (
+      <>
         {readyButton}
         {startButton}
+      </>
+    );
+  } else if (clientRoom.started === false) {
+    showMain = true;
+    if (clientRoom.lastWinner === null) {
+      setShowWinner(false);
+      return (
+        <div />
+      );
+    }
+    content = (
+      <>
+        <div className={styles.user}>
+          <h1 className={styles.username}>
+            {clientRoom.lastWinner.username}
+            <br />
+            {clientRoom.lastWinner.id === userId
+            && t('you')}
+          </h1>
+          <FontAwesomeIcon icon={faUserCircle} className={styles.userIcon} />
+          <h1 className={styles.username}>
+            {t('won')}
+          </h1>
+        </div>
+        <TextButton
+          label={clientRoom.lastWinner.id === userId ? t('yay') : t('whatever')}
+          className={styles.winnerButton}
+          onClick={() => setShowWinner(false)}
+        />
+        <div />
+      </>
+    );
+  }
+
+  return (
+    <div className={`${styles.wrapper} ${showMain ? styles.showMain : ''}`}>
+      <div className={styles.main}>
+        {roomHeader(false)}
+        {content}
       </div>
       <div className={styles.playerList}>
         {roomHeader(true)}

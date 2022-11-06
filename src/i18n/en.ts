@@ -22,6 +22,10 @@ const en = {
   unready: "WAIT I'M NOT READY",
   waitingForUsers: 'Waiting for other players...',
   start: 'LET\'S GO',
+  you: '(YOU)',
+  won: 'WON!',
+  yay: 'YAY!!!',
+  whatever: 'WHATEVER.',
 };
 
 export default en;
