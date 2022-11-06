@@ -79,9 +79,6 @@ function setReady(client: WebSocketClientInfo, command: any): boolean {
 
 function getNewStatement() : string {
   let randomNumber = Math.floor(Math.random() * (statements.length - 1));
-  if (randomNumber == 0) {
-    randomNumber = 1;
-  }
   return statements[randomNumber];
 }
 
@@ -89,6 +86,7 @@ function startClock(room: Room) {
   if (!room.started)
     return;
   room.timeout = setTimeout(function () {
+    room.playerInput = '';
     if (room.failsUntilChange > 1) {
       room.statement = getNewStatement();
       room.failsUntilChange = 0;
@@ -98,7 +96,7 @@ function startClock(room: Room) {
     broadcastRoomInfo(room);
     if (room.started)
       startClock(room);
-  }, 1000000); // TODO change to 15000 again 
+  }, 15000);
 }
 
 function startGame(client: WebSocketClientInfo): boolean {
@@ -131,18 +129,33 @@ function checkWord(word: string, statement: string | null): boolean {
   return true;
 }
 
-function submitWord(client: WebSocketClientInfo, command: any): boolean {
+
+function setInput(client: WebSocketClientInfo, command: any): boolean {
   const room = getRoom(client.info.authInfo!.roomName);
-  const word = command.word;
-  if (!room || !room.started || typeof word != 'string') {
+  const userInput = command.userInput;
+  if (!room || !room.started || typeof userInput != 'string') {
     return false;
   }
   if (room.players[room.currentPlayer].userId != Number(client.info.authInfo!.user.id) || room.timeout === undefined) {
     return false;
   }
-  if (!checkWord(word, room.statement)) {
+  room.playerInput = userInput;
+  return true;
+}
+
+function submitWord(client: WebSocketClientInfo, _command: any): boolean {
+  const room = getRoom(client.info.authInfo!.roomName);
+  if (!room || !room.started || room.playerInput == null) {
     return false;
   }
+  if (room.players[room.currentPlayer].userId != Number(client.info.authInfo!.user.id) || room.timeout === undefined) {
+    return false;
+  }
+  if (!checkWord(room.playerInput, room.statement)) {
+    room.playerInput = '';
+    return false;
+  }
+  room.playerInput = '';
   room.nextTurn(0);
   clearTimeout(room.timeout);
   room.statement = getNewStatement();
@@ -223,6 +236,7 @@ const websocketFunctions = {
   startGame,
   setReady,
   submitWord,
+  setInput,
 };
 
 export default websocketFunctions;
