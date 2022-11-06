@@ -51,12 +51,15 @@ export default class Room {
 
   failsUntilChange: number;
 
+  usedWords: string[];
+
   constructor(name: string, users: WebSocketClientInfo[]) {
     this.name = name;
     this.users = users;
     this.playerInput = null;
     this.statement = null;
     this.failsUntilChange = 0;
+    this.usedWords = [];
   }
 
   isGameOver(): boolean {

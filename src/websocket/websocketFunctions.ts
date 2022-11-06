@@ -99,7 +99,7 @@ function startClock(room: Room) {
     broadcastRoomInfo(room);
     if (room.started)
       startClock(room);
-  }, 15000);
+  }, 10000);
 }
 
 function startGame(client: WebSocketClientInfo): boolean {
@@ -142,7 +142,7 @@ function setInput(client: WebSocketClientInfo, command: any): boolean {
   if (room.players[room.currentPlayer].userId != Number(client.info.authInfo!.user.id) || room.timeout === undefined) {
     return false;
   }
-  room.playerInput = userInput;
+  room.playerInput = userInput.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   return true;
 }
 
@@ -155,10 +155,11 @@ function submitWord(client: WebSocketClientInfo, _command: any): boolean {
   if (room.players[room.currentPlayer].userId != Number(client.info.authInfo!.user.id) || room.timeout === undefined) {
     return false;
   }
-  if (!checkWord(room.playerInput, room.statement)) {
+  if (!checkWord(room.playerInput, room.statement) || room.usedWords.includes(room.playerInput)) {
     room.playerInput = '';
     return false;
   }
+  room.usedWords.push(room.playerInput);
   room.playerInput = '';
   room.nextTurn(0);
   clearTimeout(room.timeout);
