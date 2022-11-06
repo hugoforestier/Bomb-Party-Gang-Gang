@@ -45,7 +45,7 @@ npm run build
 npm run start
 ```
 
-You can then access your sever on [http://localhost:8080]()
+You can then access your sever on http://localhost:8080
 
 ## Manage the Database
 
