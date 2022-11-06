@@ -174,6 +174,10 @@ function leaveRoom(client: WebSocketClientInfo): boolean {
   }
 
   room.users = room.users.filter(user => user.info.authInfo!.user.id !== client.info.authInfo!.user.id);
+  if (room.started === false) {
+    room.players = room.players.filter(p => p.userId !== Number(client.info.authInfo!.user.id));
+  }
+  console.log(room);
 
   client.info.authInfo!.roomName = undefined;
   notifyPlayerLeftRoom(client);
