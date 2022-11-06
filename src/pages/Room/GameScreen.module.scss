@@ -1,0 +1,19 @@
+@import 'base';
+
+.statement {
+    font-size: 1.5em;
+    font-weight: 900;
+    margin: 20px auto 0 auto;
+    line-height: 80px;
+    height: 80px;
+    width: 80px;
+    border: 3px dashed $secondary;
+
+    @media all and (min-width: 1025px) {
+        font-size: 2em;
+        height: 100px;
+        width: 100px;
+        line-height: 100px;
+        border-width: 5px;
+    }
+}

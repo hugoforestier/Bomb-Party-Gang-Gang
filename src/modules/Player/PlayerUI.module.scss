@@ -12,15 +12,26 @@
     }
 
     .userIcon {
-        width: 96px;
-        height: 96px;
-        margin: 20px 0;
+        width: 64px;
+        height: 64px;
+        margin: 10px 0;
+
+        @media all and (min-width: 769px) {
+            width: 96px;
+            height: 96px;
+            margin: 20px 0;
+        }
     }
 
     .heart {
-        width: 32px;
-        height: 32px;
         margin: 0 5px;
+        width: 24px;
+        height: 24px;
+
+        @media all and (min-width: 769px) {
+            width: 32px;
+            height: 32px;
+        }
     }
 
 }

@@ -11,6 +11,7 @@ import { useUserId } from '../../redux/reducers/user/userUtils';
 import { getWsConnectionStatus, useWebSocket } from '../../redux/reducers/websocket/connectionUtils';
 import { getRoomInfo, getRoomList } from '../../redux/reducers/websocket/infoHandlerUtils';
 import { useAppDispatch, useAppSelector } from '../../redux/types';
+import GameScreen from './GameScreen';
 import Loading from './Loading';
 import styles from './Room.module.scss';
 import WinnerScreen from './WinnerScreen';
@@ -127,7 +128,17 @@ export default function Room() {
   let content: React.ReactNode | undefined;
   let showMain = false;
 
-  if (clientRoom.started === false && showWinner) {
+  console.log(clientRoom);
+  if (clientRoom.players.length > 0) {
+    showMain = true;
+    content = (
+      <GameScreen
+        player={clientRoom.players[clientRoom.currentPlayer]}
+        userId={userId ?? -1}
+        statement="EN"
+      />
+    );
+  } else if (clientRoom.started === false && !showWinner) {
     content = (
       <>
         {readyButton}
@@ -137,10 +148,10 @@ export default function Room() {
   } else if (clientRoom.started === false) {
     showMain = true;
     if (clientRoom.lastWinner === null) {
-      /* setShowWinner(false);
-       * return (
-       *   <div />
-       * ); */
+      setShowWinner(false);
+      return (
+        <div />
+      );
     }
     content = (
       <WinnerScreen

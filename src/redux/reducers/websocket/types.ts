@@ -17,6 +17,8 @@ export type Room = {
   players: Player[];
   currentPlayer: number;
   playerInput: string | null;
+  statement: string | null;
+  failsUntilChange: number;
 };
 
 export type RoomDetails = {
