@@ -20,7 +20,7 @@ const en = {
   loading: 'LOADING...',
   ready: 'READY UP',
   unready: "WAIT I'M NOT READY",
-  waitingForUsers: 'Waiting for other players...',
+  waitingForUsers: 'Waiting for others...',
   start: 'LET\'S GO',
   you: '(YOU)',
   won: 'WON!',

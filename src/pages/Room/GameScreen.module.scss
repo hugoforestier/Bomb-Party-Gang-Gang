@@ -35,7 +35,7 @@
     left: 0;
     height: 24px;
     background: $secondary;
-    animation: animationMobile linear 15s forwards;
+    animation: animationMobile linear 10s forwards;
 
     @media all and (min-width: 1025px) {
         height: 32px;

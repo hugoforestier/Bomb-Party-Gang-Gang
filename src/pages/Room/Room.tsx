@@ -164,7 +164,7 @@ export default function Room() {
     content = (
       <WinnerScreen
         userId={userId ?? -1}
-        winner={clientRoom.users[0]}
+        winner={clientRoom.lastWinner}
         onClose={() => setShowWinner(false)}
       />
     );

@@ -1,5 +1,9 @@
 @import 'base';
 
+html, body, #root, .App {
+    height: 100%;
+}
+
 html, body, h1, h2, h3, p, button, input {
   margin: 0;
   padding: 0;
