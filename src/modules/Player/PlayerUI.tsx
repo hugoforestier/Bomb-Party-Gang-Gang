@@ -22,12 +22,15 @@ export default function PlayerUI({ player, userId, children }: Props) {
 
   return (
     <div className={styles.user}>
-      <h1 className={styles.username}>
-        {player.username}
-        <br />
-        {player.userId === userId
+      <div className={styles.username}>
+        <h1>
+          {player.userId === userId
           && t('you')}
-      </h1>
+        </h1>
+        <h1>
+          {player.username}
+        </h1>
+      </div>
       <FontAwesomeIcon icon={faUserCircle} className={styles.userIcon} />
       <br />
       {hearts}

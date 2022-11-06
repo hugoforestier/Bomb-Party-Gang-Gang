@@ -28,6 +28,7 @@ const fr: typeof en = {
   won: 'A GAGNÉ!',
   yay: 'YAY!!!',
   whatever: 'M\'EN FOU.',
+  typeWord: 'TYPE YOUR WORD...',
 };
 
 export default fr;

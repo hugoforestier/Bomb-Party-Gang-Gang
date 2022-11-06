@@ -26,6 +26,7 @@ const en = {
   won: 'WON!',
   yay: 'YAY!!!',
   whatever: 'WHATEVER.',
+  typeWord: 'TYPE YOUR WORD...',
 };
 
 export default en;

@@ -8,6 +8,7 @@
     height: 80px;
     width: 80px;
     border: 3px dashed $secondary;
+    text-transform: uppercase;
 
     @media all and (min-width: 1025px) {
         font-size: 2em;
@@ -16,4 +17,50 @@
         line-height: 100px;
         border-width: 5px;
     }
+}
+
+@keyframes animationMobile {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
+.timer {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 24px;
+    background: $secondary;
+    animation: animationMobile linear 15s forwards;
+
+    @media all and (min-width: 1025px) {
+        height: 32px;
+        top: unset;
+        bottom: 0;
+    }
+}
+
+.input {
+    border: none;
+    width: 100%;
+    color: $secondary;
+    text-align: center;
+    font-size: 2em;
+    background: none;
+    outline: none;
+    height: 1.5em;
+    text-transform: uppercase;
+
+    &::placeholder {
+        color: rgba($secondary, 0.5);
+    }
+
+    @media all and (min-width: 1025px) {
+        font-size: 4em;
+        margin-bottom: 32px;
+    }    
 }

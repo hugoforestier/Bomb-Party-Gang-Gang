@@ -18,7 +18,7 @@ export default function WinnerScreen({ winner, userId, onClose }: Props) {
     <>
       <PlayerUI
         userId={userId}
-        player={{ lives: 2, userId: winner.id, username: winner.username }}
+        player={{ lives: 0, userId: winner.id, username: winner.username }}
       >
         <h1 className={styles.username}>
           {t('won')}

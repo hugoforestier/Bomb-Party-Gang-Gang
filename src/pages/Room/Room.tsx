@@ -99,6 +99,12 @@ export default function Room() {
     }));
   };
 
+  const startGame = () => {
+    ws?.send(JSON.stringify({
+      command: 'startGame',
+    }));
+  };
+
   const roomHeader = (inverted: boolean) => (
     <div className={styles.roomTitleBar}>
       <IconButton
@@ -121,7 +127,7 @@ export default function Room() {
     );
   } else if (userIsReady) {
     startButton = (
-      <TextButton className={styles.start} label={t('start')} />
+      <TextButton className={styles.start} label={t('start')} onClick={startGame} />
     );
   }
 
@@ -129,13 +135,15 @@ export default function Room() {
   let showMain = false;
 
   console.log(clientRoom);
-  if (clientRoom.players.length > 0) {
+  if (clientRoom.started) {
     showMain = true;
     content = (
       <GameScreen
         player={clientRoom.players[clientRoom.currentPlayer]}
         userId={userId ?? -1}
-        statement="EN"
+        statement={clientRoom.statement ?? ''}
+        input={clientRoom.playerInput ?? ''}
+        currentPlayer={clientRoom.currentPlayer}
       />
     );
   } else if (clientRoom.started === false && !showWinner) {
@@ -174,6 +182,7 @@ export default function Room() {
           users={clientRoom.users}
           players={clientRoom.players}
           showPlayers={clientRoom?.started}
+          currentTurn={clientRoom.currentPlayer}
         />
         {readyButton}
         {startButton}
