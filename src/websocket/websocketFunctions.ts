@@ -136,13 +136,14 @@ function checkWord(word: string, statement: string | null): boolean {
 function setInput(client: WebSocketClientInfo, command: any): boolean {
   const room = getRoom(client.info.authInfo!.roomName);
   const userInput = command.userInput;
-  if (!room || !room.started || typeof userInput != 'string') {
+  if (!room || !room.started || typeof userInput !== 'string') {
     return false;
   }
   if (room.players[room.currentPlayer].userId != Number(client.info.authInfo!.user.id) || room.timeout === undefined) {
     return false;
   }
   room.playerInput = userInput.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  broadcastRoomInfo(room);
   return true;
 }
 
