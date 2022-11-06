@@ -5,7 +5,7 @@ export type UserInfo = {
   username: string;
 };
 
-interface Player {
+export interface Player {
   userId: number;
   lives: number;
   username: string;
@@ -19,6 +19,8 @@ export type RoomInfo = {
   players: Player[];
   currentPlayer: number;
   playerInput: string | null;
+  statement: string | null;
+  failsUntilChange: number;
 };
 
 export type RoomInfoShort = {
@@ -45,10 +47,16 @@ export default class Room {
 
   playerInput: string | null;
 
+  statement: string | null;
+
+  failsUntilChange: number;
+
   constructor(name: string, users: WebSocketClientInfo[]) {
     this.name = name;
     this.users = users;
     this.playerInput = null;
+    this.statement = null;
+    this.failsUntilChange = 0;
   }
 
   isGameOver(): boolean {
@@ -76,7 +84,6 @@ export default class Room {
       return;
     }
     do {
-      console.log('oopsie');
       this.currentPlayer = (this.currentPlayer + 1) % this.players.length;
     } while (this.players[this.currentPlayer].lives <= 0);
   }
@@ -84,7 +91,7 @@ export default class Room {
   public setUserReady(id: number, ready: boolean): boolean {
     const player = this.players.findIndex(p => p.userId === id);
     const user = this.users.find(u => Number(u.info.authInfo!.user.id) === id);
-    if (user === undefined)
+    if (user === undefined || this.started == true)
       return false;
     if (ready) {
       if (player !== -1)
@@ -115,6 +122,8 @@ export default class Room {
       started: this.started,
       currentPlayer: this.currentPlayer,
       playerInput: this.playerInput, 
+      statement: this.statement,
+      failsUntilChange: this.failsUntilChange,
     };
   }
 
