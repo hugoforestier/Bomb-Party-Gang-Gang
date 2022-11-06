@@ -10,7 +10,7 @@ You have to setup PostgreSQL database. You can do that with the following comman
 docker run -e POSTGRES_PASSWORD=gang -e POSTGRES_DB=gang -e POSTGRES_USER=gang -e POSTGRES_HOST_AUTH_METHOD=trust -p5432:5432 postgres
 ```
 
-Any values you put as password, db, user will have to be added to the env files in the [pre-start](./src/pre-start/) directory.
+Any values you put as password, db, user will have to be added to the env files in the [pre-start](./src/pre-start/env/) directory.
 
 To change the current database, you'll need to modify the schema.prisma file and then do the following command:
 
@@ -44,6 +44,8 @@ npx prisma migrate dev
 npm run build
 npm run start
 ```
+
+You can then access your sever on http://localhost:8080
 
 ## Manage the Database
 

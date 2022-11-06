@@ -66,7 +66,7 @@ function getRoom(roomName: any): Room | null {
 
 function setReady(client: WebSocketClientInfo, command: any): boolean {
   const isReady: boolean = command.isReady;
-  if (typeof isReady !== 'string') {
+  if (typeof isReady !== 'boolean') {
     return false;
   }
   const room = getRoom(client.info.authInfo!.roomName);

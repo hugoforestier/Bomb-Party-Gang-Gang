@@ -91,7 +91,7 @@ export default class Room {
   public setUserReady(id: number, ready: boolean): boolean {
     const player = this.players.findIndex(p => p.userId === id);
     const user = this.users.find(u => Number(u.info.authInfo!.user.id) === id);
-    if (user === undefined || this.started == true)
+    if (user === undefined || this.started === true)
       return false;
     if (ready) {
       if (player !== -1)
