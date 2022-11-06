@@ -79,6 +79,9 @@ function setReady(client: WebSocketClientInfo, command: any): boolean {
 
 function getNewStatement() : string {
   const randomNumber = Math.floor(Math.random() * (statements.length - 1));
+  if (statements[randomNumber] == '') {
+    return 'ier';
+  }
   return statements[randomNumber];
 }
 
@@ -123,7 +126,7 @@ function checkWord(word: string, statement: string | null): boolean {
   if (!formatedWord.includes(statement)) {
     return false;
   }
-  if (!dictionary.includes(formatedWord + '\n')) {
+  if (!dictionary.includes(formatedWord + '\n') || formatedWord == '') {
     return false;
   }
   return true;
