@@ -78,7 +78,7 @@ function setReady(client: WebSocketClientInfo, command: any): boolean {
 }
 
 function getNewStatement() : string {
-  let randomNumber = Math.floor(Math.random() * (statements.length - 1));
+  const randomNumber = Math.floor(Math.random() * (statements.length - 1));
   return statements[randomNumber];
 }
 
@@ -147,6 +147,7 @@ function submitWord(client: WebSocketClientInfo, _command: any): boolean {
   const room = getRoom(client.info.authInfo!.roomName);
   if (!room || !room.started || room.playerInput == null) {
     return false;
+    console.log(_command);
   }
   if (room.players[room.currentPlayer].userId != Number(client.info.authInfo!.user.id) || room.timeout === undefined) {
     return false;
