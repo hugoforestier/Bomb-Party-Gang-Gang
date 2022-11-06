@@ -28,7 +28,7 @@ function Heart({ lives }: {
 }) {
   if (lives === 0) {
     return (
-      <div className={styles.lives}>
+      <div className={styles.heartCounter}>
         <FontAwesomeIcon icon={faSkull} />
       </div>
     );
