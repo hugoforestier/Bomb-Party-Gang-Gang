@@ -1,5 +1,7 @@
 # Gang ganG frontend
 
+This project is hosted on https://jamilettel.com
+
 This is a React web application that uses Typescript.
 
 ## Configuration
