@@ -74,6 +74,8 @@
         color: $primary;
         display: flex;
         flex-direction: column;
+        position: relative;
+        overflow: hidden;
 
         @media all and (min-width: 1025px) {
             text-align: right;

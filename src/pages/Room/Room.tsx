@@ -5,6 +5,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import IconButton from '../../components/buttons/IconButton/IconButton';
 import TextButton from '../../components/buttons/TextButton/TextButton';
 import { ROOM_MAX_CAPACITY, SIGN_IN_URL } from '../../keys';
+import PageCircleDecoration from '../../modules/PageDecoration/PageCircleDecoration';
+import PageRectDecoration from '../../modules/PageDecoration/PageRectDecoration';
 import PlayerList from '../../modules/PlayerList/PlayerList';
 import { resetLoginReducer } from '../../redux/reducers/login/loginReducer';
 import { useUserId } from '../../redux/reducers/user/userUtils';
@@ -173,10 +175,13 @@ export default function Room() {
   return (
     <div className={`${styles.wrapper} ${showMain ? styles.showMain : ''}`}>
       <div className={styles.main}>
+        <PageRectDecoration dark />
         {roomHeader(false)}
         {content}
       </div>
       <div className={styles.playerList}>
+        <PageRectDecoration dark={false} />
+        <PageCircleDecoration />
         {roomHeader(true)}
         <PlayerList
           users={clientRoom.users}
