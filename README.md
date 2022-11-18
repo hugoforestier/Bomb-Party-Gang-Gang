@@ -10,7 +10,7 @@ The server uses environment variables for configuration. This includes the URL o
 
 You can use a `.env` file: copy the `.env.example` and edit the values.
 
-## Starting the project
+## Starting the frontend
 
 To start the server in production mode, you will need the `serve` command. You can install
 with npm:
@@ -19,7 +19,7 @@ with npm:
 npm i -g serve
 ```
 
-You can start the project with the following commands:
+You can start the frontend with the following commands:
 
 ```bash
 cp .env.example .env
@@ -65,9 +65,9 @@ To revert the database to a previously working one you can do the following comm
 npx prisma db execute --file ./down.sql --schema prisma/schema.prisma 
 ```
 
-## Starting the project
+## Starting the backend
 
-You can start the project with the following commands:
+You can start the backend with the following commands:
 
 ```bash
 cp .env.example .env
@@ -80,3 +80,8 @@ npm run start
 
 You can then access your sever on http://localhost:8080
 
+## Authors
+
+- [@jamilettel](https://github.com/jamilettel)
+- [@hugoforestier](https://github.com/hugoforestier)
+- [@Guillaume-Vacelet](https://github.com/Guillaume-Vacelet)
