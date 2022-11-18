@@ -1,0 +1,29 @@
+@import 'base';
+
+.loading {
+    width: 100%;
+    background: $primary;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .loaderWrapper {
+        position: relative;
+        margin: auto;
+
+        .titleBlack {
+            color: $secondary;
+            width: 100%;
+            text-align: center;
+        }
+
+        .loader {
+            margin: auto;
+            position: block !important;
+            width: 250px !important;
+            height: 75px !important;
+            background: $secondary !important;
+
+        }
+    }
+}

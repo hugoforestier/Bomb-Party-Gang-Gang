@@ -1,0 +1,179 @@
+@import 'base';
+
+.roomTitleBar {
+    display: flex;
+
+    h1 {
+        color: $secondary;
+        height: 1.25em;
+        font-size: 2em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin: auto 0;
+        padding-left: 20px;
+
+        @media all and (min-width: 769px) {
+            font-size: 3em;
+        }
+    }
+}
+
+.wrapper {
+    height: 100%;
+    max-width: 100%;
+    background: $primary;
+    display: flex;
+
+    .main {
+        display: none;
+        padding: 32px;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex-direction: column;
+        justify-content: space-between;
+
+        @media all and (min-width: 1025px) {
+            display: flex;
+        }
+
+        .readyButton {
+            display: none;
+            height: 100px;
+            width: 550px;
+            margin: 0 auto 0 auto;
+            font-size: 2.5em;
+            font-weight: 900;
+
+            @media all and (min-width: 1025px) {
+                display: unset;
+            }
+        }
+
+        .waiting, .start {
+            width: 100%;
+            height: 2em;
+            text-align: center;
+            align-self: baseline;
+            font-size: 3em;
+            padding: 0.5em 0;
+            color: $secondary;
+            font-weight: 900;
+        }
+
+        .start {
+            color: $primary;
+        }
+    }
+
+    .playerList {
+        padding: 32px;
+        width: 100%;
+        background: $secondary;
+        color: $primary;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+
+        @media all and (min-width: 1025px) {
+            text-align: right;
+            width: 400px;
+            min-width: 400px;
+        }
+
+        @media all and (min-width: 1600px) {
+            width: 700px;
+            min-width: 700px;
+        }
+
+        .roomTitleBar {
+            h1 {
+                color: $primary;
+            }
+
+            @media all and (min-width: 1025px) {
+                display: none;
+            }            
+        }
+
+        .readyButton {
+            background: $primary;
+            color: $secondary;
+            margin-top: auto;
+            width: 100%;
+            height: 3.5em;
+            font-size: 2em;
+            font-weight: 900;
+
+            @media all and (min-width: 769px) {
+                font-size: 3.5em;
+                height: 2.5em;
+            }
+
+            @media all and (min-width: 1025px) {
+                display: none;
+            }
+
+        }
+
+        .filledButton {
+            background: $secondary;
+            color: $primary;
+            border-color: $primary;
+        }
+
+        .start, .waiting {
+            width: 100%;
+            height: 2.5em;
+            text-align: center;
+            align-self: baseline;
+            font-size: 2em;
+            padding: 0.5em 0;
+            margin-top: 20px;
+            font-weight: 900;
+
+            @media all and (min-width: 1025px) {
+                display: none;
+            }
+
+            @media all and (min-width: 769px) {
+                font-size: 3em;
+            }
+        }
+
+        .start {
+            background: $primary;
+            color: $secondary;
+        }
+
+    }
+}
+
+.showMain {
+    .main {
+        position: relative;
+        display: flex;
+    }
+
+    .winnerButton {
+        height: 2em;
+        margin: 0 auto;
+        width: 100%;
+
+        @media all and (min-width: 769px) {
+            font-size: 3em;
+            width: 500px;
+            display: flex;
+        }
+    }
+
+    .playerList {
+        display: none;
+
+        @media all and (min-width: 1025px) {
+            display: flex;
+        }
+    }
+}

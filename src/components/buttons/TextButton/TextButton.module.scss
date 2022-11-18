@@ -1,0 +1,49 @@
+@import 'base';
+
+.textButton {
+    width: 175px;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: 150ms ease-in;
+    position: relative;
+
+    .loader {
+        position: absolute;
+        height: 30px !important;
+        width: 50% !important;
+    }
+}
+
+.filled {
+    color: $primary;
+    background: $secondary;
+
+    .loader {
+        backdrop-filter: none;
+        background-color: $primary !important;
+    }
+
+    &:hover {
+        background: $secondaryLight;
+    }
+}
+
+.empty {
+    color: $secondary;
+    background: transparent;
+    border: solid $secondary 5px;
+
+    .loader {
+        backdrop-filter: none;
+        background-color: $secondary !important;
+    }
+
+    &:hover {
+        background: $primaryLight;
+    }
+}

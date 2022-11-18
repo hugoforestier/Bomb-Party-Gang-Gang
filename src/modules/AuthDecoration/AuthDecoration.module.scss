@@ -1,0 +1,170 @@
+@import 'base';
+
+.wrapper {
+    position: relative;
+    min-height: 100%;
+
+    .leftBar {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        background: $secondary;
+        width: 160px;
+
+        @media all and (max-width: 1025px) {
+            display: none;
+        }
+
+        .title, .titleShadow {
+            font-size: 56px;
+            width: max-content;
+        }
+
+        .title {
+            position: absolute;
+            left: 0;
+            top: 0;
+            text-shadow: $secondary 2px 0px 0px, $secondary 1.75517px 0.958851px 0px, $secondary 1.0806px 1.68294px 0px, $secondary 0.141474px 1.99499px 0px, $secondary -0.832294px 1.81859px 0px, $secondary -1.60229px 1.19694px 0px, $secondary -1.97998px 0.28224px 0px, $secondary -1.87291px -0.701566px 0px, $secondary -1.30729px -1.5136px 0px, $secondary -0.421592px -1.95506px 0px, $secondary 0.567324px -1.91785px 0px, $secondary 1.41734px -1.41108px 0px, $secondary 1.92034px -0.558831px 0px;            
+            color: $primary;
+            transform: rotate(90deg) translate(50%, 4em);
+        }
+
+        .titleShadow {
+            color: $secondary;
+            text-shadow: $textBg 2px 0px 0px, $textBg 1.75517px 0.958851px 0px, $textBg 1.0806px 1.68294px 0px, $textBg 0.141474px 1.99499px 0px, $textBg -0.832294px 1.81859px 0px, $textBg -1.60229px 1.19694px 0px, $textBg -1.97998px 0.28224px 0px, $textBg -1.87291px -0.701566px 0px, $textBg -1.30729px -1.5136px 0px, $textBg -0.421592px -1.95506px 0px, $textBg 0.567324px -1.91785px 0px, $textBg 1.41734px -1.41108px 0px, $textBg 1.92034px -0.558831px 0px;
+            transform: rotate(90deg) translate(calc(50% + 5px), calc(4em + 5px));
+        }
+    }
+}
+
+.circleDecoration {
+    position: absolute;
+    border: 20px solid $secondary;
+    top: -100px;
+    left: 0;
+    width: 400px;
+    height: 400px;
+    border-radius: 100%;
+    transform: rotate(-45deg);
+
+    @media all and (max-width: 1200px) {
+        display: none;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        bottom: -25px;
+        left: 50%;
+        width: 75px;
+        height: 75px;
+        background: $primary;
+        transform: translateX(-50%);
+    }
+}
+
+.rectDecoration {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 230px;
+    width: 900px;
+    overflow: hidden;
+
+    @media all and (max-width: 1200px) {
+        display: none;
+    }
+
+    div {
+        position: absolute;
+        transform: rotate(15deg) translate(-5%,-60%);
+        top: 0;
+        right: 0;
+        width: 1000px;
+        height: 250px;
+        background: $secondary;
+        
+        @media all and (max-width: 1500px) {
+            height: 200px;
+            width: 800px;
+        }
+    }
+}
+
+.barDecoration {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 600px;
+    width: 700px;
+    overflow: hidden;
+
+    @media all and (max-width: 1200px) {
+        display: none;
+    }
+
+    .barWrapper {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 800px;
+        height: 500px;
+        display: flex;
+        justify-content: space-between;
+        transform: translate(-25%,25%) rotate(45deg);
+
+        @media (max-width: 1500px) or (max-height: 820px) {
+            height: 380px;
+        }
+
+        div {
+            height: 100%;
+            width: 25px;
+            background: $secondary;
+        }
+    }
+}
+
+.lineCircleDecoration {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    height: 200px;
+    width: 900px;
+    overflow: hidden;
+
+    @media all and (max-width: 1580px) {
+        height: 165px;
+    }
+
+    @media all and (max-width: 1320px) {
+        height: 130px;
+    }
+
+    @media all and (max-width: 1200px) {
+        display: none;
+    }
+
+    .lines {
+        height: 200px;
+        width: 900px;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column-reverse;
+
+        .line {
+            display: flex;
+            flex-direction: row-reverse;
+
+            div {
+                margin-left: 10px;
+                width: 25px;
+                height: 25px;
+                background: $secondary;
+                border-radius: 100%;
+            }
+        }
+        
+    }
+}

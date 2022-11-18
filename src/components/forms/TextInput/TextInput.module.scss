@@ -1,0 +1,64 @@
+@import 'base';
+
+.textInput {
+    margin: 0 0 1.75em 0;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+
+    .label {
+        font-size: 16pt;
+        font-weight: 700;
+        color: $secondary;
+    }        
+
+    .infos {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .input {
+        position: relative;
+        margin-top: 5px;
+        input {
+            color: $secondary;
+            font-size: 1.5rem;
+            background: $textBg;
+            height: 50px;
+            width: 100%;
+            border: solid $secondary 5px;
+            padding: 0 5px;
+        }
+        button {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 60px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin: 0 5px 0 0;
+            font-weight: 700;
+            text-align: center;
+        }
+    }
+
+    .errorMessage {
+        color: $red;
+        font-weight: 600;
+        position: absolute;
+        bottom: 0;
+        transform: translateY(100%);
+    }
+
+
+    .inputPassword {
+        input {
+            padding-right: 50px;
+        }
+    }
+
+}

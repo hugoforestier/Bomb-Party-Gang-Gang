@@ -1,0 +1,41 @@
+@import 'base';
+
+.rectDecoration {
+    width: 900px;
+    height: 230px;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    right: 260px;
+    display: none;
+
+    @media all and (min-width: 1025px) {
+        display: block;
+    }
+
+    @media all and (min-width: 1600px) {
+        right: 350px;
+    }
+
+    div {
+        background: $primary;
+        position: absolute;
+        transform: rotate(15deg) translate(-5%,-60%);
+        top: -50px;
+        right: 0;
+        width: 1000px;
+        height: 250px;
+
+
+        @media all and (min-width: 1600px) {
+            top: 0;
+        }
+    }
+}
+
+.dark {
+    position: fixed;
+    div {
+        background: $secondary;
+    }
+}

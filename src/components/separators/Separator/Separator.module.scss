@@ -1,0 +1,21 @@
+@import 'base';
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+
+    .text {
+        font-size: 16pt;
+        font-family: 'Unna';
+        padding: 0 20px;
+    }
+
+    .bar {
+        width: 50%;
+        height: 3px;
+        height: 3px;
+        background: $secondary;
+    }
+}
